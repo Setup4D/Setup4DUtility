@@ -97,14 +97,25 @@ A classe `TSetup4DUtilityGeneric<T>` é uma classe genérica de suporte para o d
 
 ### ⚙️ Métodos
 
-#### `class procedure EnumToList(AValue: TStrings);`
+#### `class procedure EnumToList(AValue: TStrings); overload;`
 
 Este método popula uma lista de strings com os nomes dos valores do tipo enumerado.
 
 - **Parâmetros:**
   - `AValue`: A lista de strings a ser preenchida com os nomes dos valores do tipo enumerado.
 
-#### ⚡️ `class function EnumToString(const AEnum: T): string;`
+### ⚡️ `class procedure EnumToList(AValue: TStrings; const AOldValue: string; const ANewValue: string); overload;`
+
+Este método preenche uma lista de strings com os nomes dos valores do tipo enumerado, substituindo um valor específico pelo novo valor.
+
+- **Parâmetros:**
+  - `AValue`: A lista de strings a ser preenchida.
+  - `AOldValue`: O caracter do tipo enumerado a ser substituído na lista.
+  - `ANewValue`: O novo valor que substituirá o valor antigo do caracter do enumerado.
+
+Este método permite preencher uma lista de strings com os nomes dos valores do tipo enumerado e, opcionalmente, substituir um valor específico na lista pelo novo valor. Isso pode ser útil para personalizar a lista de nomes de valores enumerados conforme necessário.
+
+#### ⚡️ `class function EnumToString(const AEnum: T): string; overload;`
 
 Este método converte um valor enumerado para uma representação de string.
 
@@ -112,6 +123,19 @@ Este método converte um valor enumerado para uma representação de string.
   - `AEnum`: O valor enumerado a ser convertido.
 - **Retorno:**
   - A representação de string do valor enumerado.
+
+###  ⚡️ `class function EnumToString(const AEnum: T; const AOldValue: string; const ANewValue: string): string; overload;`
+
+Este método converte um valor enumerado para uma representação de string, permitindo opcionalmente substituir um caractere específico pelo novo caractere na representação de string.
+
+- **Parâmetros:**
+  - `AEnum`: O valor enumerado a ser convertido.
+  - `AOldValue`: O caractere a ser substituído na representação de string.
+  - `ANewValue`: O novo caractere a ser colocado na representação de string.
+- **Retorno:**
+  - A representação de string do valor enumerado, com as substituições aplicadas, se especificadas.
+
+Este método é útil para converter um valor enumerado em uma representação de string e, opcionalmente, personalizar essa representação substituindo caracteres específicos.
 
 #### ⚡️ `class function EnumToInterger(const AEnum: T): integer;`
 
@@ -150,12 +174,16 @@ begin
   // Preenche uma lista de strings com os nomes dos valores do tipo enumerado
   LStringList := TStringList.Create;
   try
-    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList);
     // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList);
+
+    // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList, 'E', '3'); 
 
     // Converte um valor enumerado para uma representação de string
     LEnumValue := TDias.QUINTA;
     LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue);
+    LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue, 'I', '1');
 
     // Converte um valor enumerado para um número inteiro
     LIntValue := TSetup4DUtilityGeneric<TDias>.EnumToInterger(LEnumValue);
