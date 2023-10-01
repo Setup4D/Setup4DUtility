@@ -61,6 +61,51 @@ type
     {$ENDIF}
     class function CharIsNum(const AValue: Char): Boolean;
 
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Remove todos os caracteres que não são letras da string.
+    /// </summary>
+    /// <param name="AValue">
+    /// A string da qual remover os caracteres não alfabéticos.
+    /// </param>
+    /// <returns>
+    /// A string resultante contendo apenas letras.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Removes all characters that are not letters from the string.
+    /// </summary>
+    /// <param name="AValue">
+    /// The string from which to remove non-alphabetic characters.
+    /// </param>
+    /// <returns>
+    /// The resulting string containing only letters.
+    /// </returns>
+    {$ENDIF}
+    class function OnlyAlpha(const AValue: String): String;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Verifica se um caractere é uma letra.
+    /// </summary>
+    /// <param name="AValue">
+    /// O caractere a ser verificado.
+    /// </param>
+    /// <returns>
+    /// True se o caractere for uma letra, False caso contrário.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Checks if a character is a letter.
+    /// </summary>
+    /// <param name="AValue">
+    /// The character to be checked.
+    /// </param>
+    /// <returns>
+    /// True if the character is a letter, False otherwise.
+    /// </returns>
+    {$ENDIF}
+    class function CharIsAlpha(const AValue: Char): Boolean;
   end;
 implementation
 
@@ -69,10 +114,29 @@ uses
 
 { TSetup4DUtility }
 
+class function TSetup4DUtility.CharIsAlpha(const AValue: Char): Boolean;
+begin
+  Result := CharInSet(AValue, ['A'..'Z','a'..'z'] ) ;
+end;
+
 class function TSetup4DUtility.CharIsNum(const AValue: Char): Boolean;
 begin
   Result := CharInSet(AValue, ['0'..'9']) ;
 end;
+
+class function TSetup4DUtility.OnlyAlpha(const AValue: String): String;
+Var
+  LPosition : Integer ;
+  LSizeValue : Integer;
+begin
+  Result := '' ;
+  LSizeValue := Length( AValue ) ;
+  For LPosition := 1 to LSizeValue do
+  begin
+     if CharIsAlpha( AValue[LPosition] ) then
+        Result := Result + AValue[LPosition];
+  end;
+end ;
 
 class function TSetup4DUtility.OnlyNumber(const AValue: String): String;
 Var

@@ -44,7 +44,37 @@ type
     /// The string list to be populated.
     /// </param>
     {$ENDIF}
-    class procedure EnumToList(AValue: TStrings);
+    class procedure EnumToList(AValue: TStrings); overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Preenche uma lista de strings com os nomes dos valores do tipo enumerado.
+    /// </summary>
+    /// <param name="AValue">
+    /// A lista de strings a ser preenchida.
+    /// </param>
+    /// <param name="AOldValue">
+    /// Caracter a ser substituido no enumerado.
+    /// </param>
+    /// <param name="ANewValue">
+    /// Novo caractacter colocar no enumerado.
+    /// </param>
+    {$ELSE}
+    /// <summary>
+    /// Populates a string list with the names of the enumerated type values.
+    /// </summary>
+    /// <param name="AValue">
+    /// The string list to be populated.
+    /// </param>
+    /// <param name="AOldValue">
+    /// Character to be replaced in the enumerated value.
+    /// </param>
+    /// <param name="ANewValue">
+    /// New character to place in the enumerated value.
+    /// </param>
+    {$ENDIF}
+    class procedure EnumToList(AValue: TStrings; Const AOldValue: string;
+      Const ANewValue: string); overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -67,7 +97,43 @@ type
     /// The string representation of the enumerated value.
     /// </returns>
     {$ENDIF}
-    class function EnumToString(const AEnum: T): string;
+    class function EnumToString(const AEnum: T): string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte um valor enumerado para uma representação de string.
+    /// </summary>
+    /// <param name="AEnum">
+    // O valor enumerado a ser convertido.
+    // </param>
+    /// <param name="AOldValue">
+    /// Caracter a ser substituido no enumerado.
+    /// </param>
+    /// <param name="ANewValue">
+    /// Novo caractacter colocar no enumerado.
+    /// </param>
+    /// <returns>
+    /// A representação de string do valor enumerado.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Converts an enumerated value to a string representation.
+    /// </summary>
+    /// <param name="AEnum">
+    /// The enumerated value to be converted.
+    /// </param>
+    /// <param name="AOldValue">
+    /// Character to be replaced in the enumerated value.
+    /// </param>
+    /// <param name="ANewValue">
+    /// New character to place in the enumerated value.
+    /// </param>
+    /// <returns>
+    /// The string representation of the enumerated value.
+    /// </returns>
+    {$ENDIF}
+    class function EnumToString(const AEnum: T; Const AOldValue: string;
+      Const ANewValue: string): string; overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -122,6 +188,47 @@ uses
   System.SysUtils;
 
 { TSetup4DUtilityGeneric<T> }
+
+class procedure TSetup4DUtilityGeneric<T>.EnumToList(AValue: TStrings;
+  const AOldValue, ANewValue: string);
+var
+  LAuxiliar: String;
+  LIndice: integer;
+  LPosicao: integer;
+begin
+  AValue.Clear;
+  LIndice := 0;
+  repeat
+    LAuxiliar := GetEnumName(TypeInfo(T), LIndice);
+    LPosicao := GetEnumValue(TypeInfo(T), LAuxiliar);
+    LAuxiliar := StringReplace(LAuxiliar, AOldValue, ANewValue, [rfReplaceAll, rfIgnoreCase]);
+    if LPosicao <> -1 then
+      AValue.Add(LAuxiliar);
+    inc(LIndice);
+  until LPosicao < 0;
+end;
+
+class function TSetup4DUtilityGeneric<T>.EnumToString(const AEnum: T;
+  const AOldValue, ANewValue: string): string;
+var
+  LEnum: PInteger;
+  LIndice: integer;
+begin
+  try
+    LEnum := @AEnum;
+    LIndice := integer(TSetup4DNumberSequence((LEnum^)));
+    Result := GetEnumName(TypeInfo(T), LIndice);
+    Result := StringReplace(Result, AOldValue, ANewValue, [rfReplaceAll, rfIgnoreCase]);
+  except
+    {$IFDEF HAS_PORTUGUES}
+    raise EConvertError.Create('O Parâmetro passado não corresponde a ' +
+      sLineBreak + 'um inteiro Ou a um Tipo Enumerado');
+    {$ELSE}
+    raise EConvertError.Create('The parameter passed does not correspond to' +
+      sLineBreak + 'an integer or an Enum Type.');
+    {$ENDIF}
+  end;
+end;
 
 class function TSetup4DUtilityGeneric<T>.EnumToString(const AEnum: T): string;
 var
