@@ -63,6 +63,28 @@ Este método verifica se o caractere especificado é um dígito numérico.
 - **Retorno:**
   - True se o caractere for um dígito numérico, caso contrário, False.
 
+###  ⚡️ `class function OnlyAlpha(const AValue: String): String;`
+
+Este método remove todos os caracteres que não são letras da string especificada e retorna a string resultante contendo apenas letras.
+
+- **Parâmetros:**
+  - `AValue`: A string da qual deseja-se remover os caracteres não alfabéticos.
+- **Retorno:**
+  - A string resultante contendo apenas letras.
+
+Este método é útil para limpar uma string e manter apenas os caracteres alfabéticos.
+
+###  ⚡️ class function CharIsAlpha(const AValue: Char): Boolean;
+
+Este método verifica se o caractere especificado é uma letra.
+
+- **Parâmetros:**
+  - `AValue`: O caractere a ser verificado.
+- **Retorno:**
+  - True se o caractere for uma letra, caso contrário, False.
+
+Este método é útil para verificar se um caractere é uma letra do alfabeto.
+
 ### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
@@ -78,11 +100,16 @@ begin
   LValue := 'A123B456C789';
   // O valor de LResultString será '123456789'
   LResultString := TSetup4DUtility.OnlyNumber(LValue);
+  // O valor de LResultString será 'AC'
+  LResultString := TSetup4DUtility.OnlyAlpha(LValue);
   
   // Verifica se um caractere é um dígito numérico
   LChar := '5';
   // O valor de LValid será True
   LValid := TSetup4DUtility.CharIsNum(LChar);
+  LChar := 'A';
+  // O valor de LValid será True
+  LValid := TSetup4DUtility.CharIsAlpha(LChar);
   
 end;
 ```
@@ -97,14 +124,25 @@ A classe `TSetup4DUtilityGeneric<T>` é uma classe genérica de suporte para o d
 
 ### ⚙️ Métodos
 
-#### `class procedure EnumToList(AValue: TStrings);`
+#### `class procedure EnumToList(AValue: TStrings); overload;`
 
 Este método popula uma lista de strings com os nomes dos valores do tipo enumerado.
 
 - **Parâmetros:**
   - `AValue`: A lista de strings a ser preenchida com os nomes dos valores do tipo enumerado.
 
-#### ⚡️ `class function EnumToString(const AEnum: T): string;`
+### ⚡️ `class procedure EnumToList(AValue: TStrings; const AOldValue: string; const ANewValue: string); overload;`
+
+Este método preenche uma lista de strings com os nomes dos valores do tipo enumerado, substituindo um valor específico pelo novo valor.
+
+- **Parâmetros:**
+  - `AValue`: A lista de strings a ser preenchida.
+  - `AOldValue`: O caracter do tipo enumerado a ser substituído na lista.
+  - `ANewValue`: O novo valor que substituirá o valor antigo do caracter do enumerado.
+
+Este método permite preencher uma lista de strings com os nomes dos valores do tipo enumerado e, opcionalmente, substituir um valor específico na lista pelo novo valor. Isso pode ser útil para personalizar a lista de nomes de valores enumerados conforme necessário.
+
+#### ⚡️ `class function EnumToString(const AEnum: T): string; overload;`
 
 Este método converte um valor enumerado para uma representação de string.
 
@@ -112,6 +150,19 @@ Este método converte um valor enumerado para uma representação de string.
   - `AEnum`: O valor enumerado a ser convertido.
 - **Retorno:**
   - A representação de string do valor enumerado.
+
+###  ⚡️ `class function EnumToString(const AEnum: T; const AOldValue: string; const ANewValue: string): string; overload;`
+
+Este método converte um valor enumerado para uma representação de string, permitindo opcionalmente substituir um caractere específico pelo novo caractere na representação de string.
+
+- **Parâmetros:**
+  - `AEnum`: O valor enumerado a ser convertido.
+  - `AOldValue`: O caractere a ser substituído na representação de string.
+  - `ANewValue`: O novo caractere a ser colocado na representação de string.
+- **Retorno:**
+  - A representação de string do valor enumerado, com as substituições aplicadas, se especificadas.
+
+Este método é útil para converter um valor enumerado em uma representação de string e, opcionalmente, personalizar essa representação substituindo caracteres específicos.
 
 #### ⚡️ `class function EnumToInterger(const AEnum: T): integer;`
 
@@ -150,12 +201,16 @@ begin
   // Preenche uma lista de strings com os nomes dos valores do tipo enumerado
   LStringList := TStringList.Create;
   try
-    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList);
     // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList);
+
+    // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList, 'E', '3'); 
 
     // Converte um valor enumerado para uma representação de string
     LEnumValue := TDias.QUINTA;
     LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue);
+    LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue, 'I', '1');
 
     // Converte um valor enumerado para um número inteiro
     LIntValue := TSetup4DUtilityGeneric<TDias>.EnumToInterger(LEnumValue);
