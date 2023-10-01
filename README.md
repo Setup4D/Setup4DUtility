@@ -63,6 +63,28 @@ Este método verifica se o caractere especificado é um dígito numérico.
 - **Retorno:**
   - True se o caractere for um dígito numérico, caso contrário, False.
 
+###  ⚡️ `class function OnlyAlpha(const AValue: String): String;`
+
+Este método remove todos os caracteres que não são letras da string especificada e retorna a string resultante contendo apenas letras.
+
+- **Parâmetros:**
+  - `AValue`: A string da qual deseja-se remover os caracteres não alfabéticos.
+- **Retorno:**
+  - A string resultante contendo apenas letras.
+
+Este método é útil para limpar uma string e manter apenas os caracteres alfabéticos.
+
+###  ⚡️ class function CharIsAlpha(const AValue: Char): Boolean;
+
+Este método verifica se o caractere especificado é uma letra.
+
+- **Parâmetros:**
+  - `AValue`: O caractere a ser verificado.
+- **Retorno:**
+  - True se o caractere for uma letra, caso contrário, False.
+
+Este método é útil para verificar se um caractere é uma letra do alfabeto.
+
 ### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
@@ -78,11 +100,16 @@ begin
   LValue := 'A123B456C789';
   // O valor de LResultString será '123456789'
   LResultString := TSetup4DUtility.OnlyNumber(LValue);
+  // O valor de LResultString será 'AC'
+  LResultString := TSetup4DUtility.OnlyAlpha(LValue);
   
   // Verifica se um caractere é um dígito numérico
   LChar := '5';
   // O valor de LValid será True
   LValid := TSetup4DUtility.CharIsNum(LChar);
+  LChar := 'A';
+  // O valor de LValid será True
+  LValid := TSetup4DUtility.CharIsAlpha(LChar);
   
 end;
 ```
