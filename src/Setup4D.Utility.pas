@@ -1,6 +1,7 @@
 unit Setup4D.Utility;
 
 interface
+
 type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -14,7 +15,6 @@ type
   /// </summary>
   {$ENDIF}
   TSetup4DUtility = class
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Remove todos os caracteres não numéricos da string especificada.
@@ -37,7 +37,6 @@ type
     /// </returns>
     {$ENDIF}
     class function OnlyNumber(const AValue: String): String;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Verifica se o caractere especificado é um dígito numérico.
@@ -60,7 +59,6 @@ type
     /// </returns>
     {$ENDIF}
     class function CharIsNum(const AValue: Char): Boolean;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Remove todos os caracteres que não são letras da string.
@@ -83,7 +81,6 @@ type
     /// </returns>
     {$ENDIF}
     class function OnlyAlpha(const AValue: String): String;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Verifica se um caractere é uma letra.
@@ -106,13 +103,87 @@ type
     /// </returns>
     {$ENDIF}
     class function CharIsAlpha(const AValue: Char): Boolean;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Substitui caracteres especiais em uma string por equivalentes normais.
+    /// </summary>
+    /// <param name="AValue">
+    /// A string na qual os caracteres especiais serão substituídos.
+    /// </param>
+    /// <param name="AExtras">
+    /// Indica se caracteres extras também devem ser removidos (opcional).
+    /// </param>
+    /// <returns>
+    /// A string resultante após a substituição.
+    /// </returns>
+    /// <remarks>
+    ///   Esta função substitui caracteres especiais, como acentos e caracteres não alfanuméricos, por equivalentes normais.
+    ///   Pode ser útil para normalizar strings antes de processá-las ou armazená-las em sistemas que não aceitam caracteres especiais.
+    ///   O parâmetro opcional <paramref name="AExtras"/> determina se caracteres extras, como sinais de pontuação, também serão removidos.
+    /// </remarks>
+    {$ELSE}
+    /// <summary>
+    /// Replaces special characters in a string with their normal equivalents.
+    /// </summary>
+    /// <param name="AValue">
+    /// The string in which special characters will be replaced.
+    /// </param>
+    /// <param name="AExtras">
+    /// Indicates whether extra characters should also be removed (optional).
+    /// </param>
+    /// <returns>
+    /// The resulting string after replacement.
+    /// </returns>
+    /// <remarks>
+    ///   This function replaces special characters, such as accents and non-alphanumeric characters, with their normal equivalents.
+    ///   It can be useful for normalizing strings before processing or storing them in systems that do not accept special characters.
+    ///   The optional parameter <paramref name="AExtras"/> determines whether extra characters, such as punctuation marks, will also be removed.
+    /// </remarks>
+    {$ENDIF}
+    class function ReplaceSpecialChars(AValue: string; AExtras: Boolean = False): string;
+
+
   end;
 implementation
 
 uses
   System.SysUtils;
 
-{ TSetup4DUtility }
+class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
+const
+
+  _SPECIAL_CHAR: array[1..38] of String = ('á', 'à', 'ã', 'â', 'ä','Á', 'À', 'Ã', 'Â', 'Ä',
+                                     'é', 'è','É', 'È','í', 'ì','Í', 'Ì',
+                                     'ó', 'ò', 'ö','õ', 'ô','Ó', 'Ò', 'Ö', 'Õ', 'Ô',
+                                     'ú', 'ù', 'ü','Ú','Ù', 'Ü','ç','Ç','ñ','Ñ');
+
+  _NORMAL_CHAR: array[1..38] of String = ('a', 'a', 'a', 'a', 'a','A', 'A', 'A', 'A', 'A',
+                                     'e', 'e','E', 'E','i', 'i','I', 'I',
+                                     'o', 'o', 'o','o', 'o','O', 'O', 'O', 'O', 'O',
+                                     'u', 'u', 'u','u','u', 'u','c','C','n', 'N');
+
+  _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','¨','&','*',
+                                     '(',')','_','+','=','{','}','[',']','?',
+                                     ';',':',',','|','*','"','~','^','´','`',
+                                     '¨','æ','Æ','ø','£','Ø','ƒ','ª','º','¿',
+                                     '®','½','¼','ß','µ','þ','ý','Ý');
+var
+  LText : string;
+  I : Integer;
+begin
+   LText := AValue;
+   for I:=1 to 38 do
+     LText := StringReplace(LText, _SPECIAL_CHAR[I], _NORMAL_CHAR[I], [rfreplaceall]);
+
+   if (AExtras) then
+   begin
+     for I:=1 to 48 do
+       LText := StringReplace(LText, _EXTRA_CHAR[I], '', [rfreplaceall]);
+   end;
+
+   Result := LText;
+end;
 
 class function TSetup4DUtility.CharIsAlpha(const AValue: Char): Boolean;
 begin
@@ -123,7 +194,6 @@ class function TSetup4DUtility.CharIsNum(const AValue: Char): Boolean;
 begin
   Result := CharInSet(AValue, ['0'..'9']) ;
 end;
-
 class function TSetup4DUtility.OnlyAlpha(const AValue: String): String;
 Var
   LPosition : Integer ;
@@ -151,5 +221,4 @@ begin
       Result := Result + AValue[LPosition];
   end;
 end;
-
 end.
