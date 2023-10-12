@@ -2,6 +2,9 @@ unit Setup4D.Utility;
 
 interface
 
+uses
+  System.Classes;
+
 type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -143,12 +146,107 @@ type
     {$ENDIF}
     class function ReplaceSpecialChars(AValue: string; AExtras: Boolean = False): string;
 
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Lê uma tag XML específica de uma string XML.
+    /// </summary>
+    /// <remarks>
+    /// Esta função extrai o conteúdo da tag XML especificada a partir da string XML fornecida.
+    /// </remarks>
+    /// <param name="AXMLString">
+    /// A string XML da qual a tag será lida.
+    /// </param>
+    /// <param name="ATag">
+    /// A tag XML que será lida.
+    /// </param>
+    /// <returns>
+    /// O conteúdo da tag XML especificada.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Reads a specific XML tag from an XML string.
+    /// </summary>
+    /// <remarks>
+    /// This function extracts the content of the specified XML tag from the provided XML string.
+    /// </remarks>
+    /// <param name="AXMLString">
+    /// The XML string from which the tag will be read.
+    /// </param>
+    /// <param name="ATag">
+    /// The XML tag to be read.
+    /// </param>
+    /// <returns>
+    /// The content of the specified XML tag.
+    /// </returns>
+    {$ENDIF}
+    class function ReadXMLTag(const AXMLString: string; const ATag: string): string; Overload;
 
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Lê uma tag XML específica de uma string XML.
+    /// </summary>
+    /// <remarks>
+    /// Esta função extrai o conteúdo da tag XML especificada a partir da string XML fornecida.
+    /// </remarks>
+    /// <param name="AXMLString">
+    /// A lista de strings XML da qual a tag será lida.
+    /// </param>
+    /// <param name="ATag">
+    /// A tag XML que será lida.
+    /// </param>
+    /// <returns>
+    /// O conteúdo da tag XML especificada.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Reads a specific XML tag from an XML string.
+    /// </summary>
+    /// <remarks>
+    /// This function extracts the content of the specified XML tag from the provided XML string.
+    /// </remarks>
+    /// <param name="AXMLString">
+    /// The list of XML strings from which the tag will be read.
+    /// </param>
+    /// <param name="ATag">
+    /// The XML tag to be read.
+    /// </param>
+    /// <returns>
+    /// The content of the specified XML tag.
+    /// </returns>
+    {$ENDIF}
+    class function ReadXMLTag(const AXMLString: TStringList; const ATag: string): string; Overload;
   end;
 implementation
 
 uses
+  Xml.XMLDoc,
+  Xml.XMLIntf,
   System.SysUtils;
+
+class function TSetup4DUtility.ReadXMLTag(const AXMLString,
+  ATag: string): string;
+begin
+  Result := EmptyStr;
+
+  var LXMLDocument: IXMLDocument;
+  LXMLDocument := TXMLDocument.Create(nil);
+  LXMLDocument.LoadFromXML(AXMLString);
+
+  if not Assigned(LXMLDocument.DocumentElement) then
+    Exit;
+
+  var LXMLNode: IXMLNode;
+  LXMLNode := LXMLDocument.DocumentElement.ChildNodes.FindNode(ATag);
+
+  if Assigned(LXMLNode) then
+    Result := LXMLNode.Text;
+end;
+
+class function TSetup4DUtility.ReadXMLTag(const AXMLString: TStringList;
+  const ATag: string): string;
+begin
+  Result:= Self.ReadXMLTag(AXMLString.Text, ATag);
+end;
 
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
 const
