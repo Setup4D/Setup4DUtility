@@ -215,6 +215,35 @@ type
     /// </returns>
     {$ENDIF}
     class function ReadXMLTag(const AXMLString: TStringList; const ATag: string): string; Overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Remove espaços em branco de uma string.
+    /// </summary>
+    /// <remarks>
+    /// Esta função remove todos os espaços em branco de uma string e retorna a versão sem espaços.
+    /// </remarks>
+    /// <param name="AValue">
+    /// A string da qual os espaços em branco serão removidos.
+    /// </param>
+    /// <returns>
+    /// A string resultante sem espaços em branco.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Removes whitespace from a string.
+    /// </summary>
+    /// <remarks>
+    /// This function removes all whitespace from a string and returns the resulting string without spaces.
+    /// </remarks>
+    /// <param name="AValue">
+    /// The string from which whitespace will be removed.
+    /// </param>
+    /// <returns>
+    /// The resulting string without whitespace.
+    /// </returns>
+    {$ENDIF}
+    class function RemoveSpaces(const AValue: string): string;
   end;
 implementation
 
@@ -246,6 +275,17 @@ class function TSetup4DUtility.ReadXMLTag(const AXMLString: TStringList;
   const ATag: string): string;
 begin
   Result:= Self.ReadXMLTag(AXMLString.Text, ATag);
+end;
+
+class function TSetup4DUtility.RemoveSpaces(const AValue: string): string;
+begin
+  Result := EmptyStr;
+
+  for var I := 1 to Length(AValue) do
+  begin
+    if not (AValue[I] in [' ', #9, #10, #13]) then
+      Result := Result + AValue[I];
+  end;
 end;
 
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
