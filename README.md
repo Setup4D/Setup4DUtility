@@ -131,7 +131,7 @@ This function is designed to remove all whitespace from a string.
 - **Return:**
   - The string without whitespace.
 
-#### 🌱 Usage Example
+### 🌱 Usage Example
 
 Here is an example of how to use the `TSetup4DUtility` class:
 
