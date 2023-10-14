@@ -1,132 +1,138 @@
-[![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com.br)
+[![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com.br) 
 
-# Setup4DUtility
 
-![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE3..11-blue.svg)
-![Platforms](https://img.shields.io/badge/Supported%20platforms-Win32%20and%20Win64-red.svg)
+[![idiomaPt_BR](https://github.com/Setup4D/Setup4DUtility/assets/138676601/61609e1d-764f-4e9d-9ead-8593985af595)](https://github.com/Setup4D/Setup4DUtility/blob/main/README-PTBr.md) 
+[![idiomaEN](https://github.com/Setup4D/Setup4DUtility/assets/138676601/5f9f5df0-d563-4046-b5a9-207f0fa0e674)](https://github.com/Setup4D/Setup4DUtility/blob/main/README.md)  
 
-Bem-vindo(a) ao repositório do projeto Setup4DUtility! Esta aplicação foi desenvolvida para simplificar o uso de outros componentes em seus projetos. Ele fornece uma série de recursos convenientes para otimizar o desenvolvimento de aplicativos. Com o Setup4DUtility, você pode realizar interações com outros procedimentos e funções em suas aplicações Delphi de maneira rápida, simples e confiável. 
 
-## 📐 Como utilizar
 
-### ⚙️ Instalação
+# Setup4DUtility 
 
-#### ⚡️ Automática (via boss)
+[![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE3..11-blue.svg)](https://github.com/Setup4D/Setup4DUtility)
+[![Platforms](https://img.shields.io/badge/Supported%20platforms-Win32%20and%20Win64-red.svg)](https://github.com/Setup4D/Setup4DUtility) 
 
-* `[Optional]` Para facilitar recomendo utilizar [**Boss**](https://github.com/HashLoad/boss) (Dependency Manager for Delphi) para instalação, bastando apenas rodar o comando abaixo em um terminal  (Windows PowerShell for example):
+Welcome to the Setup4DUtility project repository! This application was developed to simplify the use of other components in your Delphi projects. It provides a range of convenient features to optimize your application development. With Setup4DUtility, you can interact with other procedures and functions in your Delphi applications quickly, easily, and reliably.
 
-```
+## 📐 How to Use
+
+### ⚙️ Installation
+
+#### ⚡️ Automatic (via boss)
+
+* `[Optional]` To make installation easier, we recommend using [**Boss**](https://github.com/HashLoad/boss) (Dependency Manager for Delphi). Simply run the following command in a terminal (Windows PowerShell, for example):
+
+```shell
 boss install github.com/Setup4D/Setup4DUtility
 ```
 
 #### ⚡️ Manual (Delphi)
 
-* Se você optar por instalar manualmente, basta adicionar a pasta abaixo ao seu projeto, em *Project > Options > Resource Compiler > Directories and Conditionals > Include file search path*.
+* If you choose to install manually, add the following folder to your project by going to *Project > Options > Resource Compiler > Directories and Conditionals > Include file search path*:
 
-```
+```shell
 ../Setup4DUtility/src
 ```
 
-## 📐 Modo de uso
+## 📐 How to Use
 
-### ⚙️ Idioma das mensagens
+### ⚙️ Language for Messages
 
-* O sistema suporta dois idiomas, com o inglês sendo o idioma padrão. No entanto, é possível utilizar o aplicativo em português do Brasil. Para isso, siga as etapas a seguir:
+* The system supports two languages, with English being the default language. However, it is possible to use the application in Brazilian Portuguese. To do this, follow these steps:
 
+```shell
+Access Project > Options > Delphi Compiler > Conditionals Defines
 ```
-Acesse Project > Options > Delphi Compiler > Conditionals Defines
-```
 
-* Adicione a diretiva *HAS_PORTUGUES*, necessária para habilitar o idioma português do Brasil.
+* Add the *HAS_PORTUGUES* directive, which is necessary to enable Brazilian Portuguese as the language.
 
-## 📐Função do TSetup4DUtility
+## 📐 TSetup4DUtility Function
 
-A classe `TSetup4DUtility` é uma classe de suporte para o desenvolvimento de aplicativos que contém várias funções e procedimentos que simplificam o uso de outras classes.
+The `TSetup4DUtility` class is a support class for application development, containing various functions and procedures that simplify the use of other classes.
 
-### ⚙️ Métodos
+### ⚙️ Methods
 
 #### ⚡️ `class function OnlyNumber(const AValue: String): String;`
 
-Este método remove todos os caracteres não numéricos da string especificada e retorna a string resultante contendo apenas os caracteres numéricos.
+This method removes all non-numeric characters from the specified string and returns the resulting string containing only numeric characters.
 
-- **Parâmetros:**
-  - `AValue`: A string da qual deseja-se remover os caracteres não numéricos.
-- **Retorno:**
-  - A string resultante contendo apenas os caracteres numéricos.
+- **Parameters:**
+  - `AValue`: The string from which you want to remove non-numeric characters.
+- **Return:**
+  - The resulting string containing only numeric characters.
 
 #### ⚡️ `class function CharIsNum(const AValue: Char): Boolean;`
 
-Este método verifica se o caractere especificado é um dígito numérico.
+This method checks if the specified character is a numeric digit.
 
-- **Parâmetros:**
-  - `AValue`: O caractere a ser verificado.
-- **Retorno:**
-  - True se o caractere for um dígito numérico, caso contrário, False.
+- **Parameters:**
+  - `AValue`: The character to be checked.
+- **Return:**
+  - True if the character is a numeric digit; otherwise, False.
 
-####  ⚡️ `class function OnlyAlpha(const AValue: String): String;`
+#### ⚡️ `class function OnlyAlpha(const AValue: String): String;`
 
-Este método remove todos os caracteres que não são letras da string especificada e retorna a string resultante contendo apenas letras.
+This method removes all non-alphabetic characters from the specified string and returns the resulting string containing only letters.
 
-- **Parâmetros:**
-  - `AValue`: A string da qual deseja-se remover os caracteres não alfabéticos.
-- **Retorno:**
-  - A string resultante contendo apenas letras.
+- **Parameters:**
+  - `AValue`: The string from which you want to remove non-alphabetic characters.
+- **Return:**
+  - The resulting string containing only letters.
 
-Este método é útil para limpar uma string e manter apenas os caracteres alfabéticos.
+This method is useful for cleaning a string and keeping only alphabetic characters.
 
-####  ⚡️`class function CharIsAlpha(const AValue: Char): Boolean;`
+#### ⚡️ `class function CharIsAlpha(const AValue: Char): Boolean;`
 
-Este método verifica se o caractere especificado é uma letra.
+This method checks if the specified character is a letter.
 
-- **Parâmetros:**
-  - `AValue`: O caractere a ser verificado.
-- **Retorno:**
-  - True se o caractere for uma letra, caso contrário, False.
+- **Parameters:**
+  - `AValue`: The character to be checked.
+- **Return:**
+  - True if the character is a letter; otherwise, False.
 
-Este método é útil para verificar se um caractere é uma letra do alfabeto.
+This method is useful for verifying whether a character is an alphabet letter.
 
-####  ⚡️`class function ReplaceSpecialChars(AValue: string; AExtras: Boolean = False): string;`
+#### ⚡️ `class function ReplaceSpecialChars(AValue: string; AExtras: Boolean = False): string;`
 
-Este método substitui caracteres especiais em uma string por equivalentes normais.
+This method replaces special characters in a string with their normal equivalents.
 
-- **Parâmetros:**
-  - `AValue`: O texto no qual os caracteres especiais serão substituídos.
-  - `AExtras`: Indica se caracteres extras também devem ser removidos (opcional).
-- **Retorno:**
-  - Um novo texto, que não contém caracteres especiais e, caso selecionado, não contém caracteres extras, como @, #, $, entre outros.
+- **Parameters:**
+  - `AValue`: The text in which special characters will be replaced.
+  - `AExtras`: Indicates whether extra characters should also be removed (optional).
+- **Return:**
+  - A new text that does not contain special characters and, if selected, does not contain extra characters like @, #, $, and others.
 
-####  ⚡️`class function ReadXMLTag(const AXML: string; const ATag: string): string; Overload;`
+#### ⚡️ `class function ReadXMLTag(const AXML: string; const ATag: string): string; Overload;`
 
-Essa função lê uma tag específica de um XML, o qual está em formato de string.
+This function reads a specific tag from an XML formatted as a string.
 
-- **Parâmetros:**
-  - `AXML`: O XML no formato de string a ser processado.
-  - `ATag`: A tag XML que deseja-se ler.
-- **Retorno:**
-  - O conteúdo da tag XML especificada.
-  
-####  ⚡️`class function ReadXMLTag(const AXML: TStringList; const ATag: string): string; Overload;`
+- **Parameters:**
+  - `AXML`: The XML in string format to be processed.
+  - `ATag`: The XML tag you want to read.
+- **Return:**
+  - The content of the specified XML tag.
 
-Essa função lê uma tag específica de um XML, o qual está em formato de TStringList.
+#### ⚡️ `class function ReadXMLTag(const AXML: TStringList; const ATag: string): string; Overload;`
 
-- **Parâmetros:**
-  - `AXML`: O XML no formato de TStringList a ser processado.
-  - `ATag`: A tag XML que deseja-se ler.
-- **Retorno:**
-  - O conteúdo da tag XML especificada.
-  
-####  ⚡️`class function RemoveSpaces(const AValue: string): string;`
+This function reads a specific tag from an XML formatted as a TStringList.
 
-Essa função tem a finalidade de eliminar todos os espaços em branco de uma string.
+- **Parameters:**
+  - `AXML`: The XML in TStringList format to be processed.
+  - `ATag`: The XML tag you want to read.
+- **Return:**
+  - The content of the specified XML tag.
 
-- **Parâmetros:**
-  - `AValue`: A string na qual os espaços em branco serão suprimidos.
-- **Retorno:**
-  - A string sem os espaços em branco.
+#### ⚡️ `class function RemoveSpaces(const AValue: string): string;`
 
-#### 🌱 Exemplo de Uso
+This function is designed to remove all whitespace from a string.
 
-Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
+- **Parameters:**
+  - `AValue`: The string from which whitespace will be removed.
+- **Return:**
+  - The string without whitespace.
+
+#### 🌱 Usage Example
+
+Here is an example of how to use the `TSetup4DUtility` class:
 
 ```delphi
 var
@@ -134,31 +140,31 @@ var
   LResultString: string;
   LChar: Char;
   LValid: Boolean;
-  LStringList : TStringList;
+  LStringList: TStringList;
 begin
-  // Remove todos os caracteres não numéricos da string
+  // Remove all non-numeric characters from the string
   LValue := 'A123B456C789';
-  // O valor de LResultString será '123456789'
+  // The value of LResultString will be '123456789'
   LResultString := TSetup4DUtility.OnlyNumber(LValue);
-  // O valor de LResultString será 'AC'
+  // The value of LResultString will be 'AC'
   LResultString := TSetup4DUtility.OnlyAlpha(LValue);
-  
-  // Verifica se um caractere é um dígito numérico
+
+  // Check if a character is a numeric digit
   LChar := '5';
-  // O valor de LValid será True
+  // The value of LValid will be True
   LValid := TSetup4DUtility.CharIsNum(LChar);
   LChar := 'A';
-  // O valor de LValid será True
+  // The value of LValid will be True
   LValid := TSetup4DUtility.CharIsAlpha(LChar);
 
-  // Remove todos os caracteres especial
+  // Remove all special characters
   LValue := '#Caçada';
-  // O valor de LResultString será '#Cacada'
+  // The value of LResultString will be '#Cacada'
   LResultString := TSetup4DUtility.ReplaceSpecialChars(LValue);
-  // O valor de LResultString será 'Cacada'
+  // The value of LResultString will be 'Cacada'
   LResultString := TSetup4DUtility.ReplaceSpecialChars(LValue, True);
 
-  // Ler as TAGs do XML
+  // Read XML tags
   LValue := '<?xml version="1.0"> ' +
             '<filmes> ' +
             '    <filme id="1"> ' +
@@ -177,89 +183,89 @@ begin
   LStringList := TStringList.Create;
   LStringList.Add(LValue);
 
-  // O valor de LResultString será 'O XML veste prada'
+  // The value of LResultString will be 'O XML veste prada'
   LResultString := TSetup4DUtility.ReadXMLTag(LValue, 'titulo');
-  // O valor de LResultString será 'O filme mostra a elegância da XML na representação de dados estruturados e semi estruturados.'
+  // The value of LResultString will be 'O filme mostra a elegância da XML na representação de dados estruturados e semi estruturados.'
   LResultString := TSetup4DUtility.ReadXMLTag(LStringList, 'resumo');
 
-  // Remove todos os espaços em branco
+  // Remove all whitespace
   LValue := 'O rato roeu a roupa';
-  // O valor de LResultString será 'Oratoroeuaroupa'
+  // The value of LResultString will be 'Oratoroeuaroupa'
   LResultString := TSetup4DUtility.RemoveSpaces(LValue);
 end;
 ```
 
-## 📐Função do TSetup4DUtilityGeneric<T>
+## 📐 TSetup4DUtilityGeneric<T> Function
 
-A classe `TSetup4DUtilityGeneric<T>` é uma classe genérica de suporte para o desenvolvimento de aplicativos. Ela contém várias funções e procedimentos que simplificam o uso de outros tipos enumerados.
+The `TSetup4DUtilityGeneric<T>` class is a generic support class for application development, containing various functions and procedures that simplify the use of other enumerated types.
 
-### ⚙️ Tipos e Enums Relacionados
+### ⚙️ Related Types and Enums
 
-- **TSetup4DNumberSequence**: Um tipo enumerado que representa uma faixa numérica de trabalho de 0 a 255.
+- **TSetup4DNumberSequence**: An enumerated type that represents a numeric range from 0 to 255.
 
-### ⚙️ Métodos
+### ⚙️ Methods
 
 #### `class procedure EnumToList(AValue: TStrings); overload;`
 
-Este método popula uma lista de strings com os nomes dos valores do tipo enumerado.
+This method populates a string list with the names of the enumerated type values.
 
-- **Parâmetros:**
-  - `AValue`: A lista de strings a ser preenchida com os nomes dos valores do tipo enumerado.
+- **Parameters:**
+  - `AValue`: The string list to be filled with the names of the enumerated type values.
 
-### ⚡️ `class procedure EnumToList(AValue: TStrings; const AOldValue: string; const ANewValue: string); overload;`
+#### ⚡️ `class procedure EnumToList(AValue: TStrings; const AOldValue: string; const ANewValue: string); overload;`
 
-Este método preenche uma lista de strings com os nomes dos valores do tipo enumerado, substituindo um valor específico pelo novo valor.
+This method populates a string list with the names of the enumerated type values, replacing a specific value with a new one.
 
-- **Parâmetros:**
-  - `AValue`: A lista de strings a ser preenchida.
-  - `AOldValue`: O caracter do tipo enumerado a ser substituído na lista.
-  - `ANewValue`: O novo valor que substituirá o valor antigo do caracter do enumerado.
+- **Parameters:**
+  - `AValue`: The string list to be populated.
+  - `AOldValue`: The enumerated type value to be replaced in the list.
+  - `ANewValue`: The new value to replace the old enumerated type value.
 
-Este método permite preencher uma lista de strings com os nomes dos valores do tipo enumerado e, opcionalmente, substituir um valor específico na lista pelo novo valor. Isso pode ser útil para personalizar a lista de nomes de valores enumerados conforme necessário.
+This method allows you to populate a string list with the names of the enumerated type values and optionally replace a specific value in the list with a new one. This can be useful for customizing the list of enumerated type value names as needed.
 
 #### ⚡️ `class function EnumToString(const AEnum: T): string; overload;`
 
-Este método converte um valor enumerado para uma representação de string.
+This method converts an enumerated value into a string representation.
 
-- **Parâmetros:**
-  - `AEnum`: O valor enumerado a ser convertido.
-- **Retorno:**
-  - A representação de string do valor enumerado.
+- **Parameters:**
+  - `AEnum`: The enumerated value to be converted.
+- **Return:**
+  - The string representation of the enumerated value.
 
-###  ⚡️ `class function EnumToString(const AEnum: T; const AOldValue: string; const ANewValue: string): string; overload;`
+#### ⚡️ `class function EnumToString(const AEnum: T; const AOldValue: string; const ANewValue: string): string; overload;`
 
-Este método converte um valor enumerado para uma representação de string, permitindo opcionalmente substituir um caractere específico pelo novo caractere na representação de string.
+This method converts an enumerated value into a string representation, optionally replacing a specific character with a new character in the string representation.
 
-- **Parâmetros:**
-  - `AEnum`: O valor enumerado a ser convertido.
-  - `AOldValue`: O caractere a ser substituído na representação de string.
-  - `ANewValue`: O novo caractere a ser colocado na representação de string.
-- **Retorno:**
-  - A representação de string do valor enumerado, com as substituições aplicadas, se especificadas.
+- **Parameters:**
+  - `AEnum`: The enumerated value to be converted.
+  - `AOldValue`: The character to be replaced in the string representation.
+  - `ANewValue`: The new character to be placed in the string representation.
+- **Return:**
+  - The string representation of the enumerated value, with the specified substitutions applied if provided.
 
-Este método é útil para converter um valor enumerado em uma representação de string e, opcionalmente, personalizar essa representação substituindo caracteres específicos.
+This method is useful for converting an enumerated value into a string representation and, optionally, customizing this representation by replacing specific characters.
 
 #### ⚡️ `class function EnumToInterger(const AEnum: T): integer;`
 
-Este método converte um valor enumerado para um número inteiro.
+This method converts an enumerated value into an integer.
 
-- **Parâmetros:**
-  - `AEnum`: O valor enumerado a ser convertido.
-- **Retorno:**
-  - O número inteiro correspondente ao valor enumerado.
+- **Parameters:**
+  - `AEnum`: The enumerated value to be converted.
+- **Return:**
+  - The integer corresponding to the enumerated value.
 
 #### ⚡️ `class function StringToEnum(const AValue: string): T;`
 
-Este método converte uma representação de string para um valor enumerado.
+This method converts a string representation into an enumerated value.
 
-- **Parâmetros:**
-  - `AValue`: A representação de string a ser convertida.
-- **Retorno:**
-  - O valor enumerado correspondente à representação de string.
+- **Parameters:**
+  - `AValue`: The string representation to be converted.
+- **Return:**
+  - The enumerated value corresponding to the string representation.
 
-### 🌱 Exemplo de Uso
+### 🌱 Usage Example
 
-Aqui está um exemplo de como usar a classe `TSetup4DUtilityGeneric<T>`:
+Here is an example of how to use the `TSetup4DUtilityGeneric<T>` class:
 
 ```delphi
 Type
@@ -273,24 +279,24 @@ var
   LStringValue: string;
   LIntValue: integer;
 begin
-  // Preenche uma lista de strings com os nomes dos valores do tipo enumerado
+  // Populate a string list with the names of the enumerated type values
   LStringList := TStringList.Create;
   try
-    // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    // The `LStringList` now contains the names of the enumerated type values
     TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList);
 
-    // A lista `LStringList` agora contém os nomes dos valores do tipo enumerado
+    // The `LStringList` now contains the names of the enumerated type values
     TSetup4DUtilityGeneric<TDias>.EnumToList(LStringList, 'E', '3'); 
 
-    // Converte um valor enumerado para uma representação de string
+    // Convert an enumerated value into a string representation
     LEnumValue := TDias.QUINTA;
     LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue);
     LStringValue := TSetup4DUtilityGeneric<TDias>.EnumToString(LEnumValue, 'I', '1');
 
-    // Converte um valor enumerado para um número inteiro
+    // Convert an enumerated value into an integer
     LIntValue := TSetup4DUtilityGeneric<TDias>.EnumToInterger(LEnumValue);
 
-    // Converte uma representação de string para um valor enumerado
+    // Convert a string representation into an enumerated value
     LStringValue := 'SEGUNDA';
     LEnumValue := TSetup4DUtilityGeneric<TDias>.StringToEnum(LStringValue);
   finally
