@@ -1,10 +1,11 @@
 [![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com.br) 
 
-
-[![idiomaPt_BR](https://github.com/Setup4D/Setup4DUtility/assets/138676601/61609e1d-764f-4e9d-9ead-8593985af595)](https://github.com/Setup4D/Setup4DUtility/blob/main/README-PTBr.md) 
-[![idiomaEN](https://github.com/Setup4D/Setup4DUtility/assets/138676601/5f9f5df0-d563-4046-b5a9-207f0fa0e674)](https://github.com/Setup4D/Setup4DUtility/blob/main/README.md)  
-
-
+<a href="https://github.com/Setup4D/Setup4DUtility/blob/main/README-PTBr.md">
+   <img src="https://user-images.githubusercontent.com/138676601/275272225-61609e1d-764f-4e9d-9ead-8593985af595.png">
+</a>
+<a href="https://github.com/Setup4D/Setup4DUtility/blob/main/README.md">
+   <img src="https://user-images.githubusercontent.com/138676601/275272281-5f9f5df0-d563-4046-b5a9-207f0fa0e674.png">
+</a>
 
 # Setup4DUtility 
 
