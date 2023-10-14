@@ -132,7 +132,7 @@ Essa função tem a finalidade de eliminar todos os espaços em branco de uma st
 - **Retorno:**
   - A string sem os espaços em branco.
 
-#### 🌱 Exemplo de Uso
+### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
 
