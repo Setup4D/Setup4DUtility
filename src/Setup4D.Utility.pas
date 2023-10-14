@@ -283,7 +283,7 @@ begin
 
   for var I := 1 to Length(AValue) do
   begin
-    if not (AValue[I] in [' ', #9, #10, #13]) then
+    if not CharInSet(AValue[I], [' ', #9, #10, #13]) then
       Result := Result + AValue[I];
   end;
 end;
