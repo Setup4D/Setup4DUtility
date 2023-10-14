@@ -1,4 +1,4 @@
-[![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com)
+[![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com.br)
 
 # Setup4DUtility
 
@@ -63,7 +63,7 @@ Este método verifica se o caractere especificado é um dígito numérico.
 - **Retorno:**
   - True se o caractere for um dígito numérico, caso contrário, False.
 
-###  ⚡️ `class function OnlyAlpha(const AValue: String): String;`
+####  ⚡️ `class function OnlyAlpha(const AValue: String): String;`
 
 Este método remove todos os caracteres que não são letras da string especificada e retorna a string resultante contendo apenas letras.
 
@@ -74,7 +74,7 @@ Este método remove todos os caracteres que não são letras da string especific
 
 Este método é útil para limpar uma string e manter apenas os caracteres alfabéticos.
 
-###  ⚡️ class function CharIsAlpha(const AValue: Char): Boolean;
+####  ⚡️`class function CharIsAlpha(const AValue: Char): Boolean;`
 
 Este método verifica se o caractere especificado é uma letra.
 
@@ -85,7 +85,46 @@ Este método verifica se o caractere especificado é uma letra.
 
 Este método é útil para verificar se um caractere é uma letra do alfabeto.
 
-### 🌱 Exemplo de Uso
+####  ⚡️`class function ReplaceSpecialChars(AValue: string; AExtras: Boolean = False): string;`
+
+Este método substitui caracteres especiais em uma string por equivalentes normais.
+
+- **Parâmetros:**
+  - `AValue`: O texto no qual os caracteres especiais serão substituídos.
+  - `AExtras`: Indica se caracteres extras também devem ser removidos (opcional).
+- **Retorno:**
+  - Um novo texto, que não contém caracteres especiais e, caso selecionado, não contém caracteres extras, como @, #, $, entre outros.
+
+####  ⚡️`class function ReadXMLTag(const AXML: string; const ATag: string): string; Overload;`
+
+Essa função lê uma tag específica de um XML, o qual está em formato de string.
+
+- **Parâmetros:**
+  - `AXML`: O XML no formato de string a ser processado.
+  - `ATag`: A tag XML que deseja-se ler.
+- **Retorno:**
+  - O conteúdo da tag XML especificada.
+  
+####  ⚡️`class function ReadXMLTag(const AXML: TStringList; const ATag: string): string; Overload;`
+
+Essa função lê uma tag específica de um XML, o qual está em formato de TStringList.
+
+- **Parâmetros:**
+  - `AXML`: O XML no formato de TStringList a ser processado.
+  - `ATag`: A tag XML que deseja-se ler.
+- **Retorno:**
+  - O conteúdo da tag XML especificada.
+  
+####  ⚡️`class function RemoveSpaces(const AValue: string): string;`
+
+Essa função tem a finalidade de eliminar todos os espaços em branco de uma string.
+
+- **Parâmetros:**
+  - `AValue`: A string na qual os espaços em branco serão suprimidos.
+- **Retorno:**
+  - A string sem os espaços em branco.
+
+#### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
 
@@ -95,6 +134,7 @@ var
   LResultString: string;
   LChar: Char;
   LValid: Boolean;
+  LStringList : TStringList;
 begin
   // Remove todos os caracteres não numéricos da string
   LValue := 'A123B456C789';
@@ -110,7 +150,42 @@ begin
   LChar := 'A';
   // O valor de LValid será True
   LValid := TSetup4DUtility.CharIsAlpha(LChar);
-  
+
+  // Remove todos os caracteres especial
+  LValue := '#Caçada';
+  // O valor de LResultString será '#Cacada'
+  LResultString := TSetup4DUtility.ReplaceSpecialChars(LValue);
+  // O valor de LResultString será 'Cacada'
+  LResultString := TSetup4DUtility.ReplaceSpecialChars(LValue, True);
+
+  // Ler as TAGs do XML
+  LValue := '<?xml version="1.0"> ' +
+            '<filmes> ' +
+            '    <filme id="1"> ' +
+            '        <titulo>O XML veste prada</titulo> ' +
+            '        <resumo>O filme mostra a elegância da XML na representação de dados estruturados e semi estruturados.</resumo> ' +
+            '        <genero>Aventura</genero> ' +
+            '        <genero>Documentário</genero> ' +
+            '        <elenco> ' +
+            '            <ator>Mark UPlanguage</ator> ' +
+            '            <ator>Mary well-Formed</ator> ' +
+            '            <ator>Sedna D. Atabase</ator> ' +
+            '        </elenco> ' +
+            '    </filme> ' +
+            '</filmes> ';
+
+  LStringList := TStringList.Create;
+  LStringList.Add(LValue);
+
+  // O valor de LResultString será 'O XML veste prada'
+  LResultString := TSetup4DUtility.ReadXMLTag(LValue, 'titulo');
+  // O valor de LResultString será 'O filme mostra a elegância da XML na representação de dados estruturados e semi estruturados.'
+  LResultString := TSetup4DUtility.ReadXMLTag(LStringList, 'resumo');
+
+  // Remove todos os espaços em branco
+  LValue := 'O rato roeu a roupa';
+  // O valor de LResultString será 'Oratoroeuaroupa'
+  LResultString := TSetup4DUtility.RemoveSpaces(LValue);
 end;
 ```
 
