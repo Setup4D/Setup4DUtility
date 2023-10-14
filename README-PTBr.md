@@ -1,5 +1,13 @@
 [![Logo da Setup4D](https://setup4d.com.br/github/assets/logotransparente.png)](https://www.setup4d.com.br)
 
+<a href="https://github.com/Setup4D/Setup4DUtility/blob/main/README.md">
+   <img src="https://user-images.githubusercontent.com/138676601/275272281-5f9f5df0-d563-4046-b5a9-207f0fa0e674.png">
+</a>
+
+<a href="https://github.com/Setup4D/Setup4DUtility/blob/main/README-PTBr.md">
+   <img src="https://user-images.githubusercontent.com/138676601/275272225-61609e1d-764f-4e9d-9ead-8593985af595.png">
+</a>
+
 # Setup4DUtility
 
 ![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE3..11-blue.svg)
