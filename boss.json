@@ -1,0 +1,9 @@
+{
+	"name": "Setup4DUtility",
+	"description": "Esta aplicação foi desenvolvida para simplificar o uso de outros componentes em seus projetos.",
+	"version": "1.0.1",
+	"homepage": "www.setup4d.com.br",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {}
+}
