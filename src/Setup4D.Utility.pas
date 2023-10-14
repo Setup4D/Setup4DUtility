@@ -153,7 +153,7 @@ type
     /// <remarks>
     /// Esta função extrai o conteúdo da tag XML especificada a partir da string XML fornecida.
     /// </remarks>
-    /// <param name="AXMLString">
+    /// <param name="AXML">
     /// A string XML da qual a tag será lida.
     /// </param>
     /// <param name="ATag">
@@ -169,7 +169,7 @@ type
     /// <remarks>
     /// This function extracts the content of the specified XML tag from the provided XML string.
     /// </remarks>
-    /// <param name="AXMLString">
+    /// <param name="AXML">
     /// The XML string from which the tag will be read.
     /// </param>
     /// <param name="ATag">
@@ -179,7 +179,7 @@ type
     /// The content of the specified XML tag.
     /// </returns>
     {$ENDIF}
-    class function ReadXMLTag(const AXMLString: string; const ATag: string): string; Overload;
+    class function ReadXMLTag(const AXML: string; const ATag: string): string; Overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -188,7 +188,7 @@ type
     /// <remarks>
     /// Esta função extrai o conteúdo da tag XML especificada a partir da string XML fornecida.
     /// </remarks>
-    /// <param name="AXMLString">
+    /// <param name="AXML">
     /// A lista de strings XML da qual a tag será lida.
     /// </param>
     /// <param name="ATag">
@@ -204,7 +204,7 @@ type
     /// <remarks>
     /// This function extracts the content of the specified XML tag from the provided XML string.
     /// </remarks>
-    /// <param name="AXMLString">
+    /// <param name="AXML">
     /// The list of XML strings from which the tag will be read.
     /// </param>
     /// <param name="ATag">
@@ -214,7 +214,7 @@ type
     /// The content of the specified XML tag.
     /// </returns>
     {$ENDIF}
-    class function ReadXMLTag(const AXMLString: TStringList; const ATag: string): string; Overload;
+    class function ReadXMLTag(const AXML: TStringList; const ATag: string): string; Overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -252,14 +252,14 @@ uses
   Xml.XMLIntf,
   System.SysUtils;
 
-class function TSetup4DUtility.ReadXMLTag(const AXMLString,
+class function TSetup4DUtility.ReadXMLTag(const AXML,
   ATag: string): string;
 begin
   Result := EmptyStr;
 
   var LXMLDocument: IXMLDocument;
   LXMLDocument := TXMLDocument.Create(nil);
-  LXMLDocument.LoadFromXML(AXMLString);
+  LXMLDocument.LoadFromXML(AXML);
 
   if not Assigned(LXMLDocument.DocumentElement) then
     Exit;
@@ -271,10 +271,10 @@ begin
     Result := LXMLNode.Text;
 end;
 
-class function TSetup4DUtility.ReadXMLTag(const AXMLString: TStringList;
+class function TSetup4DUtility.ReadXMLTag(const AXML: TStringList;
   const ATag: string): string;
 begin
-  Result:= Self.ReadXMLTag(AXMLString.Text, ATag);
+  Result:= Self.ReadXMLTag(AXML.Text, ATag);
 end;
 
 class function TSetup4DUtility.RemoveSpaces(const AValue: string): string;
