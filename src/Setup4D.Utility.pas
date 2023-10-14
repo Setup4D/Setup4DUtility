@@ -280,7 +280,6 @@ end;
 class function TSetup4DUtility.RemoveSpaces(const AValue: string): string;
 begin
   Result := EmptyStr;
-
   for var I := 1 to Length(AValue) do
   begin
     if not CharInSet(AValue[I], [' ', #9, #10, #13]) then
