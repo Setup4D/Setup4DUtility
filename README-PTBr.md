@@ -131,6 +131,18 @@ Essa função tem a finalidade de eliminar todos os espaços em branco de uma st
   - `AValue`: A string na qual os espaços em branco serão suprimidos.
 - **Retorno:**
   - A string sem os espaços em branco.
+ 
+####  ⚡️`class function IIF<T>(AValue : Boolean; T1, T2 : T) : T;`
+
+Esta função tem o propósito de avaliar uma expressão e retornar um valor específico com base na condição fornecida.
+
+- **Parâmetros:**
+  - `<T>` : Define o tipo que será retornado
+  - `AValue`: A expressão a ser verificada.
+  - `T1`: O valor retornado se a expressão for verdadeira.
+  - `T2`: O valor retornado se a expressão for falsa.
+- **Retorno:**
+   - Se a expressão for verdadeira, T1, caso contrário, retorna T2.
 
 ### 🌱 Exemplo de Uso
 
@@ -194,6 +206,15 @@ begin
   LValue := 'O rato roeu a roupa';
   // O valor de LResultString será 'Oratoroeuaroupa'
   LResultString := TSetup4DUtility.RemoveSpaces(LValue);
+
+  // Verfica se o um e maior que o zero
+  LValid := 1 > 0;
+  // O valor de LResultString será 'SIM'
+  LResultString := TSetup4DUtility.IIF<string>(LValid, 'SIM', 'NÃO');
+  // Verfica se o um e menot que o zero
+  LValid := 1 < 0;
+  // O valor de LResultString será 'NÂO'
+  LResultString := TSetup4DUtility.IIF<string>(LValid, 'SIM', 'NÃO');
 end;
 ```
 
