@@ -252,8 +252,11 @@ type
     /// <remarks>
     /// Esta função permite avaliar uma expressão e retornar um valor com base em uma condição.
     /// </remarks>
+    /// <param name="T">
+    /// Define o tipo que será retornado.
+    /// </param>
     /// <param name="AValue">
-    /// A expressão que verifica a expressão.
+    /// A expressão a ser verificada.
     /// </param>
     /// <param name="T1">
     /// O valor retornado se a expressão for verdadeira.
