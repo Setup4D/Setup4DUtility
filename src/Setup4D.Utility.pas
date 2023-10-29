@@ -244,6 +244,47 @@ type
     /// </returns>
     {$ENDIF}
     class function RemoveSpaces(const AValue: string): string;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Avalia uma expressão e retornar um valor com base em uma condição.
+    /// </summary>
+    /// <remarks>
+    /// Esta função permite avaliar uma expressão e retornar um valor com base em uma condição.
+    /// </remarks>
+    /// <param name="AValue">
+    /// A expressão que verifica a expressão.
+    /// </param>
+    /// <param name="T1">
+    /// O valor retornado se a expressão for verdadeira.
+    /// </param>
+    /// <param name="T2">
+    /// O valor retornado se a expressão for falsa.
+    /// </param>
+    /// <returns>
+    /// Se a expressão for verdadeira, retorna <paramref name="T1"/>, caso contrário, retorna <paramref name="T2"/>.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Evaluates an expression and returns a value based on a condition.
+    /// </summary>
+    /// <remarks>
+    /// This function allows evaluating an expression and returning a value based on a condition.
+    /// </remarks>
+    /// <param name="AValue">
+    /// The expression to evaluate.
+    /// </param>
+    /// <param name="T1">
+    /// The value to return if the expression is true.
+    /// </param>
+    /// <param name="T2">
+    /// The value to return if the expression is false.
+    /// </param>
+    /// <returns>
+    /// If the expression is true, returns <paramref name="T1"; otherwise, returns <paramref name="T2"/>.
+    /// </returns>
+    {$ENDIF}
+    class function IIF<T>(AValue : Boolean; T1, T2 : T) : T;
   end;
 implementation
 
@@ -331,6 +372,15 @@ class function TSetup4DUtility.CharIsNum(const AValue: Char): Boolean;
 begin
   Result := CharInSet(AValue, ['0'..'9']) ;
 end;
+
+class function TSetup4DUtility.IIF<T>(AValue: Boolean; T1, T2: T): T;
+begin
+  Result := T1;
+
+  if not AValue then
+    Result := T2;
+end;
+
 class function TSetup4DUtility.OnlyAlpha(const AValue: String): String;
 Var
   LPosition : Integer ;
