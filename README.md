@@ -131,6 +131,18 @@ This function is designed to remove all whitespace from a string.
 - **Return:**
   - The string without whitespace.
 
+#### ⚡️ `class function IIF<T>(AValue: Boolean; T1, T2: T): T;`
+
+This function is designed to evaluate an expression and return a specific value based on the provided condition.
+
+- **Parameters:**
+  - `<T>`: Defines the type that will be returned.
+  - `AValue`: The expression to be checked.
+  - `T1`: The value to be returned if the expression is true.
+  - `T2`: The value to be returned if the expression is false.
+- **Return:**
+   - If the expression is true, returns T1; otherwise, returns T2.
+
 ### 🌱 Usage Example
 
 Here is an example of how to use the `TSetup4DUtility` class:
@@ -193,6 +205,16 @@ begin
   LValue := 'O rato roeu a roupa';
   // The value of LResultString will be 'Oratoroeuaroupa'
   LResultString := TSetup4DUtility.RemoveSpaces(LValue);
+
+  // Verifies if one is greater than zero
+  LValid := 1 > 0;
+  // The value of LResultString will be 'YES'
+  LResultString := TSetup4DUtility.IIF<string>(LValid, 'YES', 'NO');
+  // Verifies if one is less than zero
+  LValid := 1 < 0;
+  // The value of LResultString will be 'NO'
+  LResultString := TSetup4DUtility.IIF<string>(LValid, 'YES', 'NO');
+
 end;
 ```
 
