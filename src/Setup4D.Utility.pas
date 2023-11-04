@@ -3,7 +3,11 @@ unit Setup4D.Utility;
 interface
 
 uses
+  {$IF DEFINED(FPC)}
+  Classes;
+  {$ELSE}
   System.Classes;
+  {$ENDIF}
 
 type
   {$IFDEF HAS_PORTUGUES}
@@ -288,13 +292,173 @@ type
     /// </returns>
     {$ENDIF}
     class function IIF<T>(AValue : Boolean; T1, T2 : T) : T;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
+    /// </summary>
+    /// <param name="AValue">
+    ///  Informações acerca do parâmetro de data e hora que se pretende formatar.
+    /// </param>
+    /// <returns>
+    /// Retorna a data e hora formatada com o padrao yyyy-mm-dd hh:nn:ss
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the date and time in the "yyyy-mm-dd hh:nn:ss" format.
+    /// </summary>
+    /// <param name="AValue">
+    /// Information about the date and time parameter that you want to format.
+    /// </param>
+    /// <returns>
+    /// Returns the date and time formatted with the pattern "yyyy-mm-dd hh:nn:ss."
+    /// </returns>
+    {$ENDIF}
+    class function GetDateTime(AValue : TDateTime): string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a data no formato "yyyy-mm-dd"
+    /// </summary>
+    /// <param name="AValue">
+    ///  Informações acerca do parâmetro de data e hora que se pretende formatar.
+    /// </param>
+    /// <returns>
+    /// Retorna a data formatada com o padrao yyyy-mm-dd
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the date in the "yyyy-mm-dd" format.
+    /// </summary>
+    /// <param name="AValue">
+    /// Information about the date parameter that you want to format.
+    /// </param>
+    /// <returns>
+    /// Returns the date formatted with the pattern "yyyy-mm-dd."
+    /// </returns>
+    {$ENDIF}
+    class function GetDate(AValue : TDateTime): string; overload;
+
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a hora no formato "hh:nn:ss"
+    /// </summary>
+    /// <param name="AValue">
+    ///  Informações acerca do parâmetro hora que se pretende formatar.
+    /// </param>
+    /// <returns>
+    /// Retorna a hora formatada com o padrao hh:nn:ss
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the time in the "hh:nn:ss" format.
+    /// </summary>
+    /// <param name="AValue">
+    /// Information about the time parameter that you want to format.
+    /// </param>
+    /// <returns>
+    /// Returns the time formatted with the pattern "hh:nn:ss."
+    /// </returns>
+    {$ENDIF}
+    class function GetTime(AValue : TDateTime): string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
+    /// </summary>
+    /// <returns>
+    /// Retorna a data e hora formatada com o padrao yyyy-mm-dd hh:nn:ss
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the date and time in the "yyyy-mm-dd hh:nn:ss" format.
+    /// </summary>
+    /// <returns>
+    /// Returns the date and time formatted with the pattern "yyyy-mm-dd hh:nn:ss."
+    /// </returns>
+    {$ENDIF}
+    class function GetDateTime: string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a hora no formato "yyyy-mm-dd"
+    /// </summary>
+    /// <returns>
+    /// Retorna a hora formatada com o padrao yyyy-mm-dd
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the time in the "yyyy-mm-dd" format.
+    /// </summary>
+    /// <returns>
+    /// Returns the time formatted with the pattern "yyyy-mm-dd."
+    /// </returns>
+    {$ENDIF}
+    class function GetDate: string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Este método obtém a hora no formato "hh:nn:ss"
+    /// </summary>
+    /// <returns>
+    /// Retorna a hora formatada com o padrao hh:nn:ss
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// This method retrieves the time in the "hh:nn:ss" format.
+    /// </summary>
+    /// <returns>
+    /// Returns the time formatted with the pattern "hh:nn:ss."
+    /// </returns>
+    {$ENDIF}
+    class function GetTime: string; overload;
   end;
 implementation
 
 uses
+  {$IF DEFINED(FPC)}
+  Dom,
+  XMLRead,
+  SysUtils;
+  {$ELSE}
   Xml.XMLDoc,
   Xml.XMLIntf,
   System.SysUtils;
+  {$ENDIF}
+
+{$IF DEFINED(FPC)}
+class function TSetup4DUtility.ReadXMLTag(const AXML, ATag: string): string;
+var
+  LXMLDocument: TXMLDocument;
+  LXMLNode: TDOMNode;
+begin
+  Result := EmptyStr;
+
+  LXMLDocument := TXMLDocument.Create;
+  try
+    try
+      ReadXMLFile(LXMLDocument, AXML);
+      LXMLNode := LXMLDocument.DocumentElement.FirstChild;
+
+      while Assigned(LXMLNode) do
+      begin
+        if LXMLNode.NodeName = ATag then
+        begin
+          Result := LXMLNode.TextContent;
+          Break;
+        end;
+        LXMLNode := LXMLNode.NextSibling;
+      end;
+    except
+      // Handle any exceptions here
+    end;
+  finally
+    LXMLDocument.Free;
+  end;
+end;
+
+{$ELSE}
 
 class function TSetup4DUtility.ReadXMLTag(const AXML,
   ATag: string): string;
@@ -315,12 +479,28 @@ begin
     Result := LXMLNode.Text;
 end;
 
+{$ENDIF}
+
 class function TSetup4DUtility.ReadXMLTag(const AXML: TStringList;
   const ATag: string): string;
 begin
   Result:= Self.ReadXMLTag(AXML.Text, ATag);
 end;
 
+{$IF DEFINED(FPC)}
+class function TSetup4DUtility.RemoveSpaces(const AValue: string): string;
+var
+  I: Integer;
+begin
+  Result := EmptyStr;
+  for I := 1 to Length(AValue) do
+  begin
+    if not (AValue[I] in [' ', #9, #10, #13]) then
+      Result := Result + AValue[I];
+  end;
+end;
+
+{$ELSE}
 class function TSetup4DUtility.RemoveSpaces(const AValue: string): string;
 begin
   Result := EmptyStr;
@@ -330,10 +510,27 @@ begin
       Result := Result + AValue[I];
   end;
 end;
+{$ENDIF}
 
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
 const
+  {$IF DEFINED(FPC)}
+  SPECIAL_CHAR: array[1..38] of string = (#$00E1, #$00E0, #$00E3, #$00E2, #$00E4, #$00C1, #$00C0, #$00C3, #$00C2, #$00C4,
+    #$00E9, #$00E8, #$00C9, #$00C8, #$00ED, #$00EC, #$00CD, #$00CC, #$00F3, #$00F2, #$00F6, #$00F5, #$00F4, #$00D3, #$00D2, #$00D6, #$00D5, #$00D4,
+    #$00FA, #$00F9, #$00FC, #$00DA, #$00D9, #$00DC, #$00E7, #$00C7, #$00F1, #$00D1);
 
+  NORMAL_CHAR: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A',
+    'e', 'e', 'E', 'E', 'i', 'i', 'I', 'I', 'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'O',
+    'u', 'u', 'u', 'u', 'u', 'u', 'c', 'C', 'n', 'N');
+
+  EXTRA_CHAR: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%', #$00A8, #$0026, #$002A,
+    '(', ')', '_', '+', '=', '{', '}', '[', ']', '?', ';', ':', ',', '|', '*', '"', '~', '^',
+    #$00B4, '`', #$00A8, #$00E6, #$00C6, #$00F8, #$00A3, #$00D8, #$0192, #$00AA, #$00BA, #$00BF, #$00AE, #$00BD, #$00BC, #$00DF, #$00B5, #$00FE, #$00FD, #$00DD);
+
+
+
+
+  {$ELSE}
   _SPECIAL_CHAR: array[1..38] of String = ('á', 'à', 'ã', 'â', 'ä','Á', 'À', 'Ã', 'Â', 'Ä',
                                      'é', 'è','É', 'È','í', 'ì','Í', 'Ì',
                                      'ó', 'ò', 'ö','õ', 'ô','Ó', 'Ò', 'Ö', 'Õ', 'Ô',
@@ -349,18 +546,19 @@ const
                                      ';',':',',','|','*','"','~','^','´','`',
                                      '¨','æ','Æ','ø','£','Ø','ƒ','ª','º','¿',
                                      '®','½','¼','ß','µ','þ','ý','Ý');
+  {$ENDIF}
 var
   LText : string;
   I : Integer;
 begin
    LText := AValue;
    for I:=1 to 38 do
-     LText := StringReplace(LText, _SPECIAL_CHAR[I], _NORMAL_CHAR[I], [rfreplaceall]);
+     LText := StringReplace(LText, {$IF DEFINED(FPC)}SPECIAL_CHAR{$ELSE}_SPECIAL_CHAR{$ENDIF}[I], {$IF DEFINED(FPC)}NORMAL_CHAR{$ELSE}_NORMAL_CHAR{$ENDIF}[I], [rfreplaceall]);
 
    if (AExtras) then
    begin
      for I:=1 to 48 do
-       LText := StringReplace(LText, _EXTRA_CHAR[I], '', [rfreplaceall]);
+       LText := StringReplace(LText, {$IF DEFINED(FPC)}EXTRA_CHAR{$ELSE}_EXTRA_CHAR{$ENDIF}[I], '', [rfreplaceall]);
    end;
 
    Result := LText;
@@ -374,6 +572,36 @@ end;
 class function TSetup4DUtility.CharIsNum(const AValue: Char): Boolean;
 begin
   Result := CharInSet(AValue, ['0'..'9']) ;
+end;
+
+class function TSetup4DUtility.GetDate: string;
+begin
+  Result := GetDate(Now);
+end;
+
+class function TSetup4DUtility.GetDate(AValue: TDateTime): string;
+begin
+  Result:= {$IF DEFINED(FPC)}SysUtils{$Else}System.SysUtils{$ENDIF}.FormatDateTime('yyyy-mm-dd', AValue);
+end;
+
+class function TSetup4DUtility.GetDateTime(AValue: TDateTime): string;
+begin
+  Result:= {$IF DEFINED(FPC)}SysUtils{$Else}System.SysUtils{$ENDIF}.FormatDateTime('yyyy-mm-dd hh:nn:ss', AValue);
+end;
+
+class function TSetup4DUtility.GetDateTime: string;
+begin
+  Result := GetDateTime(Now);
+end;
+
+class function TSetup4DUtility.GetTime: string;
+begin
+  Result := GetTime(Now);
+end;
+
+class function TSetup4DUtility.GetTime(AValue: TDateTime): string;
+begin
+  Result:= {$IF DEFINED(FPC)}SysUtils{$Else}System.SysUtils{$ENDIF}.FormatDateTime('hh:nn:ss', AValue);
 end;
 
 class function TSetup4DUtility.IIF<T>(AValue: Boolean; T1, T2: T): T;
@@ -411,4 +639,5 @@ begin
       Result := Result + AValue[LPosition];
   end;
 end;
+
 end.

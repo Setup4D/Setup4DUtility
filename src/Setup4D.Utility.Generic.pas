@@ -1,9 +1,7 @@
 unit Setup4D.Utility.Generic;
-
 interface
 uses
   System.Classes;
-
 type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
@@ -15,7 +13,6 @@ type
   /// </summary>
   {$ENDIF}
   TSetup4DNumberSequence = 0 .. 255;
-
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
   /// Classe generica de suporte no desenvolvimento de aplicativos.
@@ -28,7 +25,6 @@ type
   /// </summary>
   {$ENDIF}
   TSetup4DUtilityGeneric<T> = class
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Preenche uma lista de strings com os nomes dos valores do tipo enumerado.
@@ -45,7 +41,6 @@ type
     /// </param>
     {$ENDIF}
     class procedure EnumToList(AValue: TStrings); overload;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Preenche uma lista de strings com os nomes dos valores do tipo enumerado.
@@ -75,7 +70,6 @@ type
     {$ENDIF}
     class procedure EnumToList(AValue: TStrings; Const AOldValue: string;
       Const ANewValue: string); overload;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Converte um valor enumerado para uma representação de string.
@@ -98,7 +92,6 @@ type
     /// </returns>
     {$ENDIF}
     class function EnumToString(const AEnum: T): string; overload;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Converte um valor enumerado para uma representação de string.
@@ -134,7 +127,6 @@ type
     {$ENDIF}
     class function EnumToString(const AEnum: T; Const AOldValue: string;
       Const ANewValue: string): string; overload;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Converte um valor enumerado para um número inteiro.
@@ -157,7 +149,6 @@ type
     /// </returns>
     {$ENDIF}
     class function EnumToInterger(const AEnum: T): integer;
-
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Converte uma representação de string para um valor enumerado.
@@ -182,13 +173,10 @@ type
     class function StringToEnum(const AValue: string): T;
   end;
 implementation
-
 uses
   System.TypInfo,
   System.SysUtils;
-
 { TSetup4DUtilityGeneric<T> }
-
 class procedure TSetup4DUtilityGeneric<T>.EnumToList(AValue: TStrings;
   const AOldValue, ANewValue: string);
 var
@@ -249,7 +237,6 @@ begin
     {$ENDIF}
   end;
 end;
-
 class function TSetup4DUtilityGeneric<T>.EnumToInterger(const AEnum: T): integer;
 var
   LEnum: PInteger;
@@ -267,7 +254,6 @@ begin
     {$ENDIF}
   end;
 end;
-
 class procedure TSetup4DUtilityGeneric<T>.EnumToList(AValue: TStrings);
 var
   LAuxiliar: String;
@@ -284,7 +270,6 @@ begin
     inc(LIndice);
   until LPosicao < 0;
 end;
-
 class function TSetup4DUtilityGeneric<T>.StringToEnum(const AValue: string): T;
 var
   LEnum: ^T;
@@ -306,5 +291,4 @@ begin
     {$ENDIF}
   end;
 end;
-
 end.
