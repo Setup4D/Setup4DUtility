@@ -9,6 +9,7 @@
 
 # Setup4DUtility 
 
+[![Lazarus Supported Versions](https://img.shields.io/badge/Lazarus%20Supported%20Versions-2.2.6-blue.svg)](https://github.com/Setup4D/Setup4DUtility)
 [![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE3..11-blue.svg)](https://github.com/Setup4D/Setup4DUtility)
 [![Platforms](https://img.shields.io/badge/Supported%20platforms-Win32%20and%20Win64-red.svg)](https://github.com/Setup4D/Setup4DUtility) 
 
@@ -142,6 +143,54 @@ This function is designed to evaluate an expression and return a specific value 
   - `T2`: The value to be returned if the expression is false.
 - **Return:**
    - If the expression is true, returns T1; otherwise, returns T2.
+ 
+#### ⚡️ `class function GetDateTime(AValue: TDateTime): string; overload;`
+
+This method retrieves the date and time in the "yyyy-mm-dd hh:nn:ss" format, representing the year (yyyy), month (mm), day (dd), hour (hh), minutes (nn), and seconds (ss). This format is commonly used to represent dates and times in a machine-readable format and can be useful in various contexts, such as storing date and time records in databases.
+
+**Parameters:**
+   - `AValue`: Specify the date and time to be formatted.
+**Return:**
+   - Returns the formatted date and time.
+
+#### ⚡️ `class function GetDate(AValue: TDateTime): string; overload;`
+
+This method retrieves the date in the "yyyy-mm-dd" format, representing the year (yyyy), month (mm), and day (dd). This format is commonly used to represent dates in a machine-readable format and can be useful in various contexts, such as storing date records in databases.
+
+**Parameters:**
+   - `AValue`: Specify the date and time to be formatted.
+**Return:**
+   - Returns the formatted date.
+
+#### ⚡️ `class function GetTime(AValue: TDateTime): string; overload;`
+
+This method retrieves the time in the "hh:nn:ss" format, representing the hour (hh), minutes (nn), and seconds (ss). This format is commonly used to represent times in a machine-readable format and can be useful in various contexts, such as storing time records in databases.
+
+**Parameters:**
+   - `AValue`: Specify the time to be formatted.
+**Return:**
+   - Returns the formatted time.
+
+#### ⚡️ `class function GetDateTime: string; overload;`
+
+This method retrieves the current date and time in the "yyyy-mm-dd hh:nn:ss" format, representing the year (yyyy), month (mm), day (dd), hour (hh), minutes (nn), and seconds (ss). This format is commonly used to represent dates and times in a machine-readable format and can be useful in various contexts, such as storing date and time records in databases.
+
+**Return:**
+   - Returns the formatted date and time.
+
+#### ⚡️ `class function GetDate: string; overload;`
+
+This method retrieves the current date in the "yyyy-mm-dd" format, representing the year (yyyy), month (mm), and day (dd). This format is commonly used to represent dates in a machine-readable format and can be useful in various contexts, such as storing date records in databases.
+
+**Return:**
+   - Returns the formatted date.
+
+#### ⚡️ `class function GetTime: string; overload;`
+
+This method retrieves the current time in the "hh:nn:ss" format, representing the hour (hh), minutes (nn), and seconds (ss). This format is commonly used to represent times in a machine-readable format and can be useful in various contexts, such as storing time records in databases.
+
+**Return:**
+   - Returns the formatted time.
 
 ### 🌱 Usage Example
 

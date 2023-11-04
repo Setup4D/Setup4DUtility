@@ -143,6 +143,54 @@ Esta função tem o propósito de avaliar uma expressão e retornar um valor esp
   - `T2`: O valor retornado se a expressão for falsa.
 - **Retorno:**
    - Se a expressão for verdadeira, T1, caso contrário, retorna T2.
+ 
+#### ⚡️ `class function GetDateTime(AValue : TDateTime): string; overload;`
+
+Este método obtém a data e a hora no formato "yyyy-mm-dd hh:nn:ss", que representa o ano (yyyy), o mês (mm), o dia (dd), a hora (hh), os minutos (nn) e os segundos (ss). Esse formato é comumente usado para representar datas e horas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de data e hora em bancos de dados.
+
+**Parâmetros:**
+   - `AValue`: Informar a data e hora a ser formatada.
+**Retorno:**
+   - Retorna a data e hora formatada.
+ 
+#### ⚡️ `class function GetDate(AValue : TDateTime): string; overload;`
+
+Este método obtém a data formato "yyyy-mm-dd", que representa o ano (yyyy), o mês (mm), o dia (dd). Esse formato é comumente usado para representar datas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de data em bancos de dados.
+
+**Parâmetros:**
+   - `AValue`: Informar a data e hora a ser formatada.
+**Retorno:**
+   - Retorna a data e hora formatada.
+
+#### ⚡️ `class function GetTime(AValue : TDateTime): string; overload;`
+
+Este método obtém a hora no formato "hh:nn:ss", que representa a hora (hh), os minutos (nn) e os segundos (ss). Esse formato é comumente usado para representar horas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de hora em bancos de dados.
+
+**Parâmetros:**
+   - `AValue`: Informar a hora a ser formatada.
+**Retorno:**
+   - Retorna a data e hora formatada.
+
+#### ⚡️ `class function GetDateTime: string; overload;`
+
+Este método obtém a data e a hora no formato "yyyy-mm-dd hh:nn:ss", que representa o ano (yyyy), o mês (mm), o dia (dd), a hora (hh), os minutos (nn) e os segundos (ss). Esse formato é comumente usado para representar datas e horas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de data e hora em bancos de dados.
+
+**Retorno:**
+   - Retorna a data e hora formatada.
+ 
+#### ⚡️ `class function GetDate: string; overload;`
+
+Este método obtém a data formato "yyyy-mm-dd", que representa o ano (yyyy), o mês (mm), o dia (dd). Esse formato é comumente usado para representar datas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de data em bancos de dados.
+
+**Retorno:**
+   - Retorna a data e hora formatada.
+
+#### ⚡️ `class function GetTime: string; overload;`
+
+Este método obtém a hora no formato "hh:nn:ss", que representa a hora (hh), os minutos (nn) e os segundos (ss). Esse formato é comumente usado para representar horas em um formato legível por máquina e pode ser útil em diversos contextos, como armazenamento de registros de hora em bancos de dados.
+
+**Retorno:**
+   - Retorna a data e hora formatada.
 
 ### 🌱 Exemplo de Uso
 
