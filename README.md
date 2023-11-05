@@ -35,6 +35,10 @@ boss install github.com/Setup4D/Setup4DUtility
 ../Setup4DUtility/src
 ```
 
+### ⚙️ Dependencies
+
+* This project depends on [**Horse**](https://github.com/hashload/horse) and [**Horse Exception**](https://github.com/hashload/handle-exception), playing a crucial role in its operational functionalities. When using [**Boss**](https://github.com/HashLoad/boss) as the framework installer, the installation of **Horse** and **Horse Exception** occurs automatically. However, if you choose to manually install, follow the steps provided on the framework's [**Horse**](https://github.com/hashload/horse) and [**Horse Exception**](https://github.com/hashload/handle-exception) pages.
+  
 ## 📐 How to Use
 
 ### ⚙️ Language for Messages
