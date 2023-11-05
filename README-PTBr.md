@@ -195,6 +195,25 @@ Este método obtém a hora no formato "hh:nn:ss", que representa a hora (hh), os
 **Retorno:**
    - Retorna a data e hora formatada.
 
+#### ⚡️ `class function ProcessHorseExceptionMessage(AValue: Exception): string; overload;`
+
+Esta função recebe uma exceção e retorna uma mensagem amigável correspondente a essa exceção. Ela lida com exceções específicas, como "max_user_connections" e "a foreign key constraint fails," e fornece mensagens amigáveis personalizadas para essas exceções.
+
+**Parâmetros:**
+- `AValue`: A exceção a ser processada.
+
+**Retorno:**
+- `Result`: A mensagem amigável correspondente à exceção.
+
+#### ⚡️ `class procedure ProcessHorseExceptionMessage(AValue: Exception; AHTTPStatus: THTTPStatus); overload;`
+
+Esta sobrecarga da função `ProcessHorseExceptionMessage` recebe uma exceção e um status HTTP. Ela lança uma exceção `EHorseException` com a mensagem amigável correspondente à exceção e o status HTTP apropriado.
+
+**Parâmetros:**
+- `AValue`: A exceção a ser processada.
+- `AHTTPStatus`: O status HTTP a ser atribuído à exceção lançada.
+
+  
 ### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
