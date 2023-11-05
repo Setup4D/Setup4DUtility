@@ -3,11 +3,15 @@ unit Setup4D.Utility;
 interface
 
 uses
+  Horse.Commons,
+  Horse.Exception,
+
   {$IF DEFINED(FPC)}
   Classes,
   SysUtils;
   {$ELSE}
-  System.Classes;
+  System.Classes,
+  System.SysUtils;
   {$ENDIF}
 
 type
@@ -415,6 +419,54 @@ type
     /// </returns>
     {$ENDIF}
     class function GetTime: string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Processa mensagens de exceção para fornecer mensagens de erro significativas.
+    /// </summary>
+    /// <param name="AValue">
+    /// A exceção que ocorreu durante o processamento.
+    /// </param>
+    /// <param name="AHTTPStatus">
+    /// O status HTTP a ser associado à exceção.
+    /// </param>
+    {$ELSE}
+    /// <summary>
+    /// Process exception messages to provide meaningful error messages.
+    /// </summary>
+    /// <param name="AValue">
+    /// The exception that occurred during processing.
+    /// </param>
+    /// <param name="AHTTPStatus">
+    /// The HTTP status to be associated with the exception.
+    /// </param>
+    {$ENDIF}
+    class procedure ProcessHorseExceptionMessage(AValue: Exception;
+      AHTTPStatus: THTTPStatus); overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Processa mensagens de exceção para fornecer mensagens de erro significativas.
+    /// </summary>
+    /// <param name="AValue">
+    /// A exceção que ocorreu durante o processamento.
+    /// </param>
+    /// <returns>
+    /// A mensagem de erro processada.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Process error messages for meaningful error messages.
+    /// </summary>
+    /// <param name="AValue">
+    /// The exception that occurred during processing.
+    /// </param>
+    /// <returns>
+    /// The processed error message.
+    /// </returns>
+    {$ENDIF}
+    class function ProcessHorseExceptionMessage(
+      AValue: Exception): string; overload;
   end;
 implementation
 
@@ -424,8 +476,7 @@ uses
   XMLRead;
   {$ELSE}
   Xml.XMLDoc,
-  Xml.XMLIntf,
-  System.SysUtils;
+  Xml.XMLIntf;
   {$ENDIF}
 
 {$IF DEFINED(FPC)}
@@ -652,5 +703,70 @@ begin
       Result := Result + AValue[LPosition];
   end;
 end;
+
+class function TSetup4DUtility.ProcessHorseExceptionMessage(
+  AValue: Exception): string;
+  {$IF DEFINED(FPC)}const{$ELSE}resourcestring{$ENDIF}
+  {$IFDEF HAS_PORTUGUES}
+    _MAX_USER_CONNECTIONS                       = 'Estamos realizando uma manutenção neste momento. ' +
+                                                  'Por favor, aguarde um pouco e tente novamente mais tarde.';
+
+    _FOREGIN_KEY_FAILS                          = 'Ops, encontramos um problema. ' +
+                                                  'Os dados que você está tentando usar já estão em uso em ' +
+                                                  'outra parte do sistema. Por favor, '+
+                                                  'verifique os dados e tente novamente.';
+
+    _MESSAGE_GENERIC                            = 'Ops!!! Estamos temporariamente indisponível, ' +
+                                                  'mensagem: %s. Tente novamente mais tarde.';
+  {$ELSE}
+    _MAX_USER_CONNECTIONS                       = 'We are currently undergoing maintenance. ' +
+                                                  'Please wait a moment and try again later.';
+
+    _FOREGIN_KEY_FAILS                          = 'Oops, we''ve encountered an issue. The data you''re ' +
+                                                  'trying to use is already in use elsewhere in the system. ' +
+                                                  'Please verify the data and try again.';
+
+    _MESSAGE_GENERIC                            = 'Oops!!! We are temporarily unavailable, ' +
+                                                  'message: %s. Please try again later.';
+  {$ENDIF}
+
+begin
+
+  if AValue.Message.Contains('max_user_connections') then
+  begin
+    Result := _MAX_USER_CONNECTIONS;
+    Exit;
+  end;
+
+  if AValue.Message.Contains('a foreign key constraint fails') then
+  begin
+    Result := _FOREGIN_KEY_FAILS;
+    Exit;
+  end;
+
+  Result := Format(_MESSAGE_GENERIC, [AValue.Message]);
+
+end;
+
+class procedure TSetup4DUtility.ProcessHorseExceptionMessage(AValue: Exception;
+  AHTTPStatus: THTTPStatus);
+
+begin
+
+  if AValue.Message.Contains('max_user_connections') then
+    raise EHorseException.New
+            .Error(ProcessHorseExceptionMessage(AValue))
+            .Status(THTTPStatus.InternalServerError);
+
+  if AValue.Message.Contains('a foreign key constraint fails') then
+    raise EHorseException.New
+            .Error(ProcessHorseExceptionMessage(AValue))
+            .Status(THTTPStatus.BadRequest);
+
+  raise EHorseException.New
+      .Error(ProcessHorseExceptionMessage(AValue))
+      .Status(AHTTPStatus);
+end;
+
 
 end.

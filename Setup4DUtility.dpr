@@ -7,7 +7,8 @@ program Setup4DUtility;
 uses
   System.SysUtils,
   Setup4D.Utility.Generic in 'src\Setup4D.Utility.Generic.pas',
-  Setup4D.Utility in 'src\Setup4D.Utility.pas';
+  Setup4D.Utility in 'src\Setup4D.Utility.pas',
+  Setup4D.Utility.Enum in 'src\Setup4D.Utility.Enum.pas';
 
 begin
 end.

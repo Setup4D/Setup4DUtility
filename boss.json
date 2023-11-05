@@ -5,5 +5,8 @@
 	"homepage": "www.setup4d.com.br",
 	"mainsrc": "./src",
 	"projects": [],
-	"dependencies": {}
+	"dependencies": {
+		"github.com/hashload/handle-exception": "^0.1.8",
+		"github.com/hashload/horse": "^3.1.5"
+	}
 }
