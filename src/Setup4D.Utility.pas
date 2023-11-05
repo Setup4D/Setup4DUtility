@@ -4,7 +4,8 @@ interface
 
 uses
   {$IF DEFINED(FPC)}
-  Classes;
+  Classes,
+  SysUtils;
   {$ELSE}
   System.Classes;
   {$ENDIF}
@@ -293,6 +294,7 @@ type
     {$ENDIF}
     class function IIF<T>(AValue : Boolean; T1, T2 : T) : T;
 
+
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
     /// Este método obtém a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
@@ -419,8 +421,7 @@ implementation
 uses
   {$IF DEFINED(FPC)}
   Dom,
-  XMLRead,
-  SysUtils;
+  XMLRead;
   {$ELSE}
   Xml.XMLDoc,
   Xml.XMLIntf,
@@ -515,50 +516,60 @@ end;
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
 const
   {$IF DEFINED(FPC)}
-  SPECIAL_CHAR: array[1..38] of string = (#$00E1, #$00E0, #$00E3, #$00E2, #$00E4, #$00C1, #$00C0, #$00C3, #$00C2, #$00C4,
-    #$00E9, #$00E8, #$00C9, #$00C8, #$00ED, #$00EC, #$00CD, #$00CC, #$00F3, #$00F2, #$00F6, #$00F5, #$00F4, #$00D3, #$00D2, #$00D6, #$00D5, #$00D4,
-    #$00FA, #$00F9, #$00FC, #$00DA, #$00D9, #$00DC, #$00E7, #$00C7, #$00F1, #$00D1);
+  _SPECIAL_CHAR: array[1..38] of string = (#$00E1, #$00E0, #$00E3, #$00E2, #$00E4,
+                                            #$00C1, #$00C0, #$00C3, #$00C2, #$00C4,
+                                            #$00E9, #$00E8, #$00C9, #$00C8, #$00ED,
+                                            #$00EC, #$00CD, #$00CC, #$00F3, #$00F2,
+                                            #$00F6, #$00F5, #$00F4, #$00D3, #$00D2,
+                                            #$00D6, #$00D5, #$00D4, #$00FA, #$00F9,
+                                            #$00FC, #$00DA, #$00D9, #$00DC, #$00E7,
+                                            #$00C7, #$00F1, #$00D1);
 
-  NORMAL_CHAR: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A',
-    'e', 'e', 'E', 'E', 'i', 'i', 'I', 'I', 'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'O',
-    'u', 'u', 'u', 'u', 'u', 'u', 'c', 'C', 'n', 'N');
 
-  EXTRA_CHAR: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%', #$00A8, #$0026, #$002A,
-    '(', ')', '_', '+', '=', '{', '}', '[', ']', '?', ';', ':', ',', '|', '*', '"', '~', '^',
-    #$00B4, '`', #$00A8, #$00E6, #$00C6, #$00F8, #$00A3, #$00D8, #$0192, #$00AA, #$00BA, #$00BF, #$00AE, #$00BD, #$00BC, #$00DF, #$00B5, #$00FE, #$00FD, #$00DD);
+  _EXTRA_CHAR: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%',
+                                          #$00A8, #$0026, #$002A, '(', ')', '_',
+                                          '+', '=', '{', '}', '[', ']', '?', ';',
+                                          ':', ',', '|', '*', '"', '~', '^',
+                                          #$00B4, '`', #$00A8, #$00E6, #$00C6,
+                                          #$00F8, #$00A3, #$00D8, #$0192, #$00AA,
+                                          #$00BA, #$00BF, #$00AE, #$00BD, #$00BC,
+                                          #$00DF, #$00B5, #$00FE, #$00FD, #$00DD);
 
 
 
 
   {$ELSE}
-  _SPECIAL_CHAR: array[1..38] of String = ('á', 'à', 'ã', 'â', 'ä','Á', 'À', 'Ã', 'Â', 'Ä',
+   _SPECIAL_CHAR: array[1..38] of String = ('á', 'à', 'ã', 'â', 'ä','Á', 'À', 'Ã', 'Â', 'Ä',
                                      'é', 'è','É', 'È','í', 'ì','Í', 'Ì',
                                      'ó', 'ò', 'ö','õ', 'ô','Ó', 'Ò', 'Ö', 'Õ', 'Ô',
                                      'ú', 'ù', 'ü','Ú','Ù', 'Ü','ç','Ç','ñ','Ñ');
 
-  _NORMAL_CHAR: array[1..38] of String = ('a', 'a', 'a', 'a', 'a','A', 'A', 'A', 'A', 'A',
-                                     'e', 'e','E', 'E','i', 'i','I', 'I',
-                                     'o', 'o', 'o','o', 'o','O', 'O', 'O', 'O', 'O',
-                                     'u', 'u', 'u','u','u', 'u','c','C','n', 'N');
-
-  _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','¨','&','*',
+   _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','¨','&','*',
                                      '(',')','_','+','=','{','}','[',']','?',
                                      ';',':',',','|','*','"','~','^','´','`',
                                      '¨','æ','Æ','ø','£','Ø','ƒ','ª','º','¿',
                                      '®','½','¼','ß','µ','þ','ý','Ý');
   {$ENDIF}
+
+   _NORMAL_CHAR: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A',
+                                            'A', 'A', 'A', 'e', 'e', 'E', 'E',
+                                            'i', 'i', 'I', 'I', 'o', 'o', 'o',
+                                            'o', 'o', 'O', 'O', 'O', 'O', 'O',
+                                            'u', 'u', 'u', 'u', 'u', 'u', 'c',
+                                            'C', 'n', 'N');
+
 var
   LText : string;
   I : Integer;
 begin
    LText := AValue;
    for I:=1 to 38 do
-     LText := StringReplace(LText, {$IF DEFINED(FPC)}SPECIAL_CHAR{$ELSE}_SPECIAL_CHAR{$ENDIF}[I], {$IF DEFINED(FPC)}NORMAL_CHAR{$ELSE}_NORMAL_CHAR{$ENDIF}[I], [rfreplaceall]);
+     LText := StringReplace(LText, _SPECIAL_CHAR[I], _NORMAL_CHAR[I], [rfreplaceall]);
 
    if (AExtras) then
    begin
      for I:=1 to 48 do
-       LText := StringReplace(LText, {$IF DEFINED(FPC)}EXTRA_CHAR{$ELSE}_EXTRA_CHAR{$ENDIF}[I], '', [rfreplaceall]);
+       LText := StringReplace(LText, _EXTRA_CHAR[I], '', [rfreplaceall]);
    end;
 
    Result := LText;
@@ -604,6 +615,7 @@ begin
   Result:= {$IF DEFINED(FPC)}SysUtils{$Else}System.SysUtils{$ENDIF}.FormatDateTime('hh:nn:ss', AValue);
 end;
 
+
 class function TSetup4DUtility.IIF<T>(AValue: Boolean; T1, T2: T): T;
 begin
   Result := T1;
@@ -611,6 +623,7 @@ begin
   if not AValue then
     Result := T2;
 end;
+
 
 class function TSetup4DUtility.OnlyAlpha(const AValue: String): String;
 Var
