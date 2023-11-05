@@ -196,6 +196,25 @@ This method retrieves the current time in the "hh:nn:ss" format, representing th
 **Return:**
    - Returns the formatted time.
 
+#### ⚡️ `class function ProcessHorseExceptionMessage(AValue: Exception): string; overload;`
+
+This function takes an exception and returns a friendly message corresponding to that exception. It handles specific exceptions like "max_user_connections" and "a foreign key constraint fails," providing customized friendly messages for these exceptions.
+
+**Parameters:**
+- `AValue`: The exception to be processed.
+
+**Return:**
+- `Result`: The friendly message corresponding to the exception.
+
+#### ⚡️ `class procedure ProcessHorseExceptionMessage(AValue: Exception; AHTTPStatus: THTTPStatus); overload;`
+
+This overload of the `ProcessHorseExceptionMessage` function takes an exception and an HTTP status. It raises an `EHorseException` with the friendly message corresponding to the exception and the appropriate HTTP status.
+
+**Parameters:**
+- `AValue`: The exception to be processed.
+- `AHTTPStatus`: The HTTP status to be assigned to the thrown exception.
+
+  
 ### 🌱 Usage Example
 
 Here is an example of how to use the `TSetup4DUtility` class:
