@@ -1,4 +1,4 @@
-unit Setup4D.Utility.Enum;
+﻿unit Setup4D.Utility.Enum;
 
 interface
 Type

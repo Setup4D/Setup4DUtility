@@ -1,4 +1,4 @@
-unit Setup4D.Utility;
+Ôªøunit Setup4D.Utility;
 
 interface
 
@@ -18,7 +18,7 @@ type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
   /// Classe de suporte no desenvolvimento de aplicativos.
-  /// V·rias funÁıes e procedimento que simplifica o uso de outros classes.
+  /// V√°rias fun√ß√µes e procedimento que simplifica o uso de outros classes.
   /// </summary>
   {$ELSE}
   /// <summary>
@@ -29,13 +29,13 @@ type
   TSetup4DUtility = class
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Remove todos os caracteres n„o numÈricos da string especificada.
+    /// Remove todos os caracteres n√£o num√©ricos da string especificada.
     /// </summary>
     /// <param name="AValue">
-    /// A string da qual deseja-se remover os caracteres n„o numÈricos.
+    /// A string da qual deseja-se remover os caracteres n√£o num√©ricos.
     /// </param>
     /// <returns>
-    /// A string resultante contendo apenas os caracteres numÈricos.
+    /// A string resultante contendo apenas os caracteres num√©ricos.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -51,13 +51,13 @@ type
     class function OnlyNumber(const AValue: String): String;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Verifica se o caractere especificado È um dÌgito numÈrico.
+    /// Verifica se o caractere especificado √© um d√≠gito num√©rico.
     /// </summary>
     /// <param name="AValue">
     /// O caractere a ser verificado.
     /// </param>
     /// <returns>
-    /// True se o caractere for um dÌgito numÈrico, caso contr·rio, False.
+    /// True se o caractere for um d√≠gito num√©rico, caso contr√°rio, False.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -73,10 +73,10 @@ type
     class function CharIsNum(const AValue: Char): Boolean;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Remove todos os caracteres que n„o s„o letras da string.
+    /// Remove todos os caracteres que n√£o s√£o letras da string.
     /// </summary>
     /// <param name="AValue">
-    /// A string da qual remover os caracteres n„o alfabÈticos.
+    /// A string da qual remover os caracteres n√£o alfab√©ticos.
     /// </param>
     /// <returns>
     /// A string resultante contendo apenas letras.
@@ -95,13 +95,13 @@ type
     class function OnlyAlpha(const AValue: String): String;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Verifica se um caractere È uma letra.
+    /// Verifica se um caractere √© uma letra.
     /// </summary>
     /// <param name="AValue">
     /// O caractere a ser verificado.
     /// </param>
     /// <returns>
-    /// True se o caractere for uma letra, False caso contr·rio.
+    /// True se o caractere for uma letra, False caso contr√°rio.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -121,18 +121,18 @@ type
     /// Substitui caracteres especiais em uma string por equivalentes normais.
     /// </summary>
     /// <param name="AValue">
-    /// A string na qual os caracteres especiais ser„o substituÌdos.
+    /// A string na qual os caracteres especiais ser√£o substitu√≠dos.
     /// </param>
     /// <param name="AExtras">
-    /// Indica se caracteres extras tambÈm devem ser removidos (opcional).
+    /// Indica se caracteres extras tamb√©m devem ser removidos (opcional).
     /// </param>
     /// <returns>
-    /// A string resultante apÛs a substituiÁ„o.
+    /// A string resultante ap√≥s a substitui√ß√£o.
     /// </returns>
     /// <remarks>
-    ///   Esta funÁ„o substitui caracteres especiais, como acentos e caracteres n„o alfanumÈricos, por equivalentes normais.
-    ///   Pode ser ˙til para normalizar strings antes de process·-las ou armazen·-las em sistemas que n„o aceitam caracteres especiais.
-    ///   O par‚metro opcional <paramref name="AExtras"/> determina se caracteres extras, como sinais de pontuaÁ„o, tambÈm ser„o removidos.
+    ///   Esta fun√ß√£o substitui caracteres especiais, como acentos e caracteres n√£o alfanum√©ricos, por equivalentes normais.
+    ///   Pode ser √∫til para normalizar strings antes de process√°-las ou armazen√°-las em sistemas que n√£o aceitam caracteres especiais.
+    ///   O par√¢metro opcional <paramref name="AExtras"/> determina se caracteres extras, como sinais de pontua√ß√£o, tamb√©m ser√£o removidos.
     /// </remarks>
     {$ELSE}
     /// <summary>
@@ -157,19 +157,19 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// LÍ uma tag XML especÌfica de uma string XML.
+    /// L√™ uma tag XML espec√≠fica de uma string XML.
     /// </summary>
     /// <remarks>
-    /// Esta funÁ„o extrai o conte˙do da tag XML especificada a partir da string XML fornecida.
+    /// Esta fun√ß√£o extrai o conte√∫do da tag XML especificada a partir da string XML fornecida.
     /// </remarks>
     /// <param name="AXML">
-    /// A string XML da qual a tag ser· lida.
+    /// A string XML da qual a tag ser√° lida.
     /// </param>
     /// <param name="ATag">
-    /// A tag XML que ser· lida.
+    /// A tag XML que ser√° lida.
     /// </param>
     /// <returns>
-    /// O conte˙do da tag XML especificada.
+    /// O conte√∫do da tag XML especificada.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -192,19 +192,19 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// LÍ uma tag XML especÌfica de uma string XML.
+    /// L√™ uma tag XML espec√≠fica de uma string XML.
     /// </summary>
     /// <remarks>
-    /// Esta funÁ„o extrai o conte˙do da tag XML especificada a partir da string XML fornecida.
+    /// Esta fun√ß√£o extrai o conte√∫do da tag XML especificada a partir da string XML fornecida.
     /// </remarks>
     /// <param name="AXML">
-    /// A lista de strings XML da qual a tag ser· lida.
+    /// A lista de strings XML da qual a tag ser√° lida.
     /// </param>
     /// <param name="ATag">
-    /// A tag XML que ser· lida.
+    /// A tag XML que ser√° lida.
     /// </param>
     /// <returns>
-    /// O conte˙do da tag XML especificada.
+    /// O conte√∫do da tag XML especificada.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -227,16 +227,16 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Remove espaÁos em branco de uma string.
+    /// Remove espa√ßos em branco de uma string.
     /// </summary>
     /// <remarks>
-    /// Esta funÁ„o remove todos os espaÁos em branco de uma string e retorna a vers„o sem espaÁos.
+    /// Esta fun√ß√£o remove todos os espa√ßos em branco de uma string e retorna a vers√£o sem espa√ßos.
     /// </remarks>
     /// <param name="AValue">
-    /// A string da qual os espaÁos em branco ser„o removidos.
+    /// A string da qual os espa√ßos em branco ser√£o removidos.
     /// </param>
     /// <returns>
-    /// A string resultante sem espaÁos em branco.
+    /// A string resultante sem espa√ßos em branco.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -256,25 +256,25 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Avalia uma express„o e retornar um valor com base em uma condiÁ„o.
+    /// Avalia uma express√£o e retornar um valor com base em uma condi√ß√£o.
     /// </summary>
     /// <remarks>
-    /// Esta funÁ„o permite avaliar uma express„o e retornar um valor com base em uma condiÁ„o.
+    /// Esta fun√ß√£o permite avaliar uma express√£o e retornar um valor com base em uma condi√ß√£o.
     /// </remarks>
     /// <param name="T">
-    /// Define o tipo que ser· retornado.
+    /// Define o tipo que ser√° retornado.
     /// </param>
     /// <param name="AValue">
-    /// A express„o a ser verificada.
+    /// A express√£o a ser verificada.
     /// </param>
     /// <param name="T1">
-    /// O valor retornado se a express„o for verdadeira.
+    /// O valor retornado se a express√£o for verdadeira.
     /// </param>
     /// <param name="T2">
-    /// O valor retornado se a express„o for falsa.
+    /// O valor retornado se a express√£o for falsa.
     /// </param>
     /// <returns>
-    /// Se a express„o for verdadeira, retorna <paramref name="T1"/>, caso contr·rio, retorna <paramref name="T2"/>.
+    /// Se a express√£o for verdadeira, retorna <paramref name="T1"/>, caso contr√°rio, retorna <paramref name="T2"/>.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -301,10 +301,10 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
+    /// Este m√©todo obt√©m a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
     /// </summary>
     /// <param name="AValue">
-    ///  InformaÁıes acerca do par‚metro de data e hora que se pretende formatar.
+    ///  Informa√ß√µes acerca do par√¢metro de data e hora que se pretende formatar.
     /// </param>
     /// <returns>
     /// Retorna a data e hora formatada com o padrao yyyy-mm-dd hh:nn:ss
@@ -324,10 +324,10 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a data no formato "yyyy-mm-dd"
+    /// Este m√©todo obt√©m a data no formato "yyyy-mm-dd"
     /// </summary>
     /// <param name="AValue">
-    ///  InformaÁıes acerca do par‚metro de data e hora que se pretende formatar.
+    ///  Informa√ß√µes acerca do par√¢metro de data e hora que se pretende formatar.
     /// </param>
     /// <returns>
     /// Retorna a data formatada com o padrao yyyy-mm-dd
@@ -348,10 +348,10 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a hora no formato "hh:nn:ss"
+    /// Este m√©todo obt√©m a hora no formato "hh:nn:ss"
     /// </summary>
     /// <param name="AValue">
-    ///  InformaÁıes acerca do par‚metro hora que se pretende formatar.
+    ///  Informa√ß√µes acerca do par√¢metro hora que se pretende formatar.
     /// </param>
     /// <returns>
     /// Retorna a hora formatada com o padrao hh:nn:ss
@@ -371,7 +371,7 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
+    /// Este m√©todo obt√©m a data e a hora no formato "yyyy-mm-dd hh:nn:ss"
     /// </summary>
     /// <returns>
     /// Retorna a data e hora formatada com o padrao yyyy-mm-dd hh:nn:ss
@@ -388,7 +388,7 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a hora no formato "yyyy-mm-dd"
+    /// Este m√©todo obt√©m a hora no formato "yyyy-mm-dd"
     /// </summary>
     /// <returns>
     /// Retorna a hora formatada com o padrao yyyy-mm-dd
@@ -405,7 +405,7 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Este mÈtodo obtÈm a hora no formato "hh:nn:ss"
+    /// Este m√©todo obt√©m a hora no formato "hh:nn:ss"
     /// </summary>
     /// <returns>
     /// Retorna a hora formatada com o padrao hh:nn:ss
@@ -422,13 +422,13 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Processa mensagens de exceÁ„o para fornecer mensagens de erro significativas.
+    /// Processa mensagens de exce√ß√£o para fornecer mensagens de erro significativas.
     /// </summary>
     /// <param name="AValue">
-    /// A exceÁ„o que ocorreu durante o processamento.
+    /// A exce√ß√£o que ocorreu durante o processamento.
     /// </param>
     /// <param name="AHTTPStatus">
-    /// O status HTTP a ser associado ‡ exceÁ„o.
+    /// O status HTTP a ser associado √† exce√ß√£o.
     /// </param>
     {$ELSE}
     /// <summary>
@@ -446,10 +446,10 @@ type
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Processa mensagens de exceÁ„o para fornecer mensagens de erro significativas.
+    /// Processa mensagens de exce√ß√£o para fornecer mensagens de erro significativas.
     /// </summary>
     /// <param name="AValue">
-    /// A exceÁ„o que ocorreu durante o processamento.
+    /// A exce√ß√£o que ocorreu durante o processamento.
     /// </param>
     /// <returns>
     /// A mensagem de erro processada.
@@ -471,6 +471,8 @@ type
 implementation
 
 uses
+  Setup4D.Utility.Constantes,
+
   {$IF DEFINED(FPC)}
   Dom,
   XMLRead;
@@ -566,41 +568,16 @@ end;
 
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
 const
-  {$IF DEFINED(FPC)}
-  _SPECIAL_CHAR: array[1..38] of string = (#$00E1, #$00E0, #$00E3, #$00E2, #$00E4,
-                                            #$00C1, #$00C0, #$00C3, #$00C2, #$00C4,
-                                            #$00E9, #$00E8, #$00C9, #$00C8, #$00ED,
-                                            #$00EC, #$00CD, #$00CC, #$00F3, #$00F2,
-                                            #$00F6, #$00F5, #$00F4, #$00D3, #$00D2,
-                                            #$00D6, #$00D5, #$00D4, #$00FA, #$00F9,
-                                            #$00FC, #$00DA, #$00D9, #$00DC, #$00E7,
-                                            #$00C7, #$00F1, #$00D1);
+   _SPECIAL_CHAR: array[1..38] of String = ('√°', '√†', '√£', '√¢', '√§','√Å', '√Ä', '√É', '√Ç', '√Ñ',
+                                     '√©', '√®','√â', '√à','√≠', '√¨','√ç', '√å',
+                                     '√≥', '√≤', '√∂','√µ', '√¥','√ì', '√í', '√ñ', '√ï', '√î',
+                                     '√∫', '√π', '√º','√ö','√ô', '√ú','√ß','√á','√±','√ë');
 
-
-  _EXTRA_CHAR: array[1..48] of string = ('<', '>', '!', '@', '#', '$', '%',
-                                          #$00A8, #$0026, #$002A, '(', ')', '_',
-                                          '+', '=', '{', '}', '[', ']', '?', ';',
-                                          ':', ',', '|', '*', '"', '~', '^',
-                                          #$00B4, '`', #$00A8, #$00E6, #$00C6,
-                                          #$00F8, #$00A3, #$00D8, #$0192, #$00AA,
-                                          #$00BA, #$00BF, #$00AE, #$00BD, #$00BC,
-                                          #$00DF, #$00B5, #$00FE, #$00FD, #$00DD);
-
-
-
-
-  {$ELSE}
-   _SPECIAL_CHAR: array[1..38] of String = ('·', '‡', '„', '‚', '‰','¡', '¿', '√', '¬', 'ƒ',
-                                     'È', 'Ë','…', '»','Ì', 'Ï','Õ', 'Ã',
-                                     'Û', 'Ú', 'ˆ','ı', 'Ù','”', '“', '÷', '’', '‘',
-                                     '˙', '˘', '¸','⁄','Ÿ', '‹','Á','«','Ò','—');
-
-   _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','®','&','*',
+   _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','¬®','&','*',
                                      '(',')','_','+','=','{','}','[',']','?',
-                                     ';',':',',','|','*','"','~','^','¥','`',
-                                     '®','Ê','∆','¯','£','ÿ','É','™','∫','ø',
-                                     'Æ','Ω','º','ﬂ','µ','˛','˝','›');
-  {$ENDIF}
+                                     ';',':',',','|','*','"','~','^','¬¥','`',
+                                     '¬®','√¶','√Ü','√∏','¬£','√ò','∆í','¬™','¬∫','¬ø',
+                                     '¬Æ','¬Ω','¬º','√ü','¬µ','√æ','√Ω','√ù');
 
    _NORMAL_CHAR: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A',
                                             'A', 'A', 'A', 'e', 'e', 'E', 'E',
@@ -706,45 +683,25 @@ end;
 
 class function TSetup4DUtility.ProcessHorseExceptionMessage(
   AValue: Exception): string;
-  {$IF DEFINED(FPC)}const{$ELSE}resourcestring{$ENDIF}
-  {$IFDEF HAS_PORTUGUES}
-    _MAX_USER_CONNECTIONS                       = 'Estamos realizando uma manutenÁ„o neste momento. ' +
-                                                  'Por favor, aguarde um pouco e tente novamente mais tarde.';
-
-    _FOREGIN_KEY_FAILS                          = 'Ops, encontramos um problema. ' +
-                                                  'Os dados que vocÍ est· tentando usar j· est„o em uso em ' +
-                                                  'outra parte do sistema. Por favor, '+
-                                                  'verifique os dados e tente novamente.';
-
-    _MESSAGE_GENERIC                            = 'Ops!!! Estamos temporariamente indisponÌvel, ' +
-                                                  'mensagem: %s. Tente novamente mais tarde.';
-  {$ELSE}
-    _MAX_USER_CONNECTIONS                       = 'We are currently undergoing maintenance. ' +
-                                                  'Please wait a moment and try again later.';
-
-    _FOREGIN_KEY_FAILS                          = 'Oops, we''ve encountered an issue. The data you''re ' +
-                                                  'trying to use is already in use elsewhere in the system. ' +
-                                                  'Please verify the data and try again.';
-
-    _MESSAGE_GENERIC                            = 'Oops!!! We are temporarily unavailable, ' +
-                                                  'message: %s. Please try again later.';
-  {$ENDIF}
-
 begin
+  Result := AValue.Message;
 
   if AValue.Message.Contains('max_user_connections') then
   begin
-    Result := _MAX_USER_CONNECTIONS;
+    Result := TSetup4DUtilityConstantes.MAX_USER_CONNECTIONS;
     Exit;
   end;
 
   if AValue.Message.Contains('a foreign key constraint fails') then
   begin
-    Result := _FOREGIN_KEY_FAILS;
+    Result := TSetup4DUtilityConstantes.FOREGIN_KEY_FAILS;
     Exit;
   end;
 
-  Result := Format(_MESSAGE_GENERIC, [AValue.Message]);
+  if AValue.Message.Equals(TSetup4DUtilityConstantes.NO_RECORDS_FOUND) then
+    Exit;
+
+  Result := TSetup4DUtilityConstantes.MESSAGE_GENERIC(AValue.Message);
 
 end;
 

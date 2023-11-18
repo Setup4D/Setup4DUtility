@@ -1,4 +1,4 @@
-unit Setup4D.Utility.Generic;
+Ôªøunit Setup4D.Utility.Generic;
 interface
 uses
   System.Classes;
@@ -16,7 +16,7 @@ type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
   /// Classe generica de suporte no desenvolvimento de aplicativos.
-  /// V·rias funÁıes e procedimento que simplifica o uso de outros classes.
+  /// V√°rias fun√ß√µes e procedimento que simplifica o uso de outros classes.
   /// </summary>
   {$ELSE}
   /// <summary>
@@ -72,13 +72,13 @@ type
       Const ANewValue: string); overload;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Converte um valor enumerado para uma representaÁ„o de string.
+    /// Converte um valor enumerado para uma representa√ß√£o de string.
     /// </summary>
     /// <param name="AEnum">
     // O valor enumerado a ser convertido.
     // </param>
     /// <returns>
-    /// A representaÁ„o de string do valor enumerado.
+    /// A representa√ß√£o de string do valor enumerado.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -94,7 +94,7 @@ type
     class function EnumToString(const AEnum: T): string; overload;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Converte um valor enumerado para uma representaÁ„o de string.
+    /// Converte um valor enumerado para uma representa√ß√£o de string.
     /// </summary>
     /// <param name="AEnum">
     // O valor enumerado a ser convertido.
@@ -106,7 +106,7 @@ type
     /// Novo caractacter colocar no enumerado.
     /// </param>
     /// <returns>
-    /// A representaÁ„o de string do valor enumerado.
+    /// A representa√ß√£o de string do valor enumerado.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -129,13 +129,13 @@ type
       Const ANewValue: string): string; overload;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Converte um valor enumerado para um n˙mero inteiro.
+    /// Converte um valor enumerado para um n√∫mero inteiro.
     /// </summary>
     /// <param name="AEnum">
     /// O valor enumerado a ser convertido.
     /// </param>
     /// <returns>
-    /// O n˙mero inteiro correspondente ao valor enumerado.
+    /// O n√∫mero inteiro correspondente ao valor enumerado.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -151,13 +151,13 @@ type
     class function EnumToInterger(const AEnum: T): integer;
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
-    /// Converte uma representaÁ„o de string para um valor enumerado.
+    /// Converte uma representa√ß√£o de string para um valor enumerado.
     /// </summary>
     /// <param name="AValue">
-    /// A representaÁ„o de string a ser convertida.
+    /// A representa√ß√£o de string a ser convertida.
     /// </param>
     /// <returns>
-    /// O valor enumerado correspondente ‡ representaÁ„o de string.
+    /// O valor enumerado correspondente √† representa√ß√£o de string.
     /// </returns>
     {$ELSE}
     /// <summary>
@@ -209,7 +209,7 @@ begin
     Result := StringReplace(Result, AOldValue, ANewValue, [rfReplaceAll, rfIgnoreCase]);
   except
     {$IFDEF HAS_PORTUGUES}
-    raise EConvertError.Create('O Par‚metro passado n„o corresponde a ' +
+    raise EConvertError.Create('O Par√¢metro passado n√£o corresponde a ' +
       sLineBreak + 'um inteiro Ou a um Tipo Enumerado');
     {$ELSE}
     raise EConvertError.Create('The parameter passed does not correspond to' +
@@ -229,7 +229,7 @@ begin
     Result := GetEnumName(TypeInfo(T), LIndice);
   except
     {$IFDEF HAS_PORTUGUES}
-    raise EConvertError.Create('O Par‚metro passado n„o corresponde a ' +
+    raise EConvertError.Create('O Par√¢metro passado n√£o corresponde a ' +
       sLineBreak + 'um inteiro Ou a um Tipo Enumerado');
     {$ELSE}
     raise EConvertError.Create('The parameter passed does not correspond to' +
@@ -246,7 +246,7 @@ begin
     Result := integer(TSetup4DNumberSequence((LEnum^)));
   except
     {$IFDEF HAS_PORTUGUES}
-    raise EConvertError.Create('O Par‚metro passado n„o corresponde a ' +
+    raise EConvertError.Create('O Par√¢metro passado n√£o corresponde a ' +
       sLineBreak + 'um Tipo Enumerado');
     {$ELSE}
     raise EConvertError.Create('The parameter passed does not correspond to' +
@@ -283,7 +283,7 @@ begin
     Result := LEnum^;
   except
     {$IFDEF HAS_PORTUGUES}
-    raise EConvertError.Create('O Par‚metro "' + AValue + '" passado n„o ' +
+    raise EConvertError.Create('O Par√¢metro "' + AValue + '" passado n√£o ' +
       sLineBreak + ' corresponde a um Tipo Enumerado');
     {$ELSE}
     raise EConvertError.Create('The parameter "' + AValue + '" passed does not' +
