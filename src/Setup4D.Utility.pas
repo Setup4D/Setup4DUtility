@@ -568,35 +568,38 @@ end;
 
 class function TSetup4DUtility.ReplaceSpecialChars(AValue : string; AExtras : boolean) : string;
 const
-   _SPECIAL_CHAR: array[1..38] of String = ('á', 'à', 'ã', 'â', 'ä','Á', 'À', 'Ã', 'Â', 'Ä',
-                                     'é', 'è','É', 'È','í', 'ì','Í', 'Ì',
-                                     'ó', 'ò', 'ö','õ', 'ô','Ó', 'Ò', 'Ö', 'Õ', 'Ô',
-                                     'ú', 'ù', 'ü','Ú','Ù', 'Ü','ç','Ç','ñ','Ñ');
+   _SPECIAL_CHAR: array of String = ['á', 'à', 'ã', 'â', 'ä', 'Á', 'À', 'Ã', 'Â', 'Ä',
+                                     'é', 'è', 'ê', 'ë', 'É', 'È', 'Ê', 'Ë',
+                                     'í', 'ì', 'î', 'ï', 'Í', 'Ì', 'Î', 'Ï',
+                                     'ó', 'ò', 'õ', 'ô', 'ö', 'Ó', 'Ò', 'Õ', 'Ô', 'Ö',
+                                     'ú', 'ù', 'û', 'ü', 'Ú', 'Ù', 'Û', 'Ü',
+                                     'ç', 'Ç','ñ', 'Ñ'];
 
-   _EXTRA_CHAR: array[1..48] of string = ('<','>','!','@','#','$','%','¨','&','*',
-                                     '(',')','_','+','=','{','}','[',']','?',
-                                     ';',':',',','|','*','"','~','^','´','`',
-                                     '¨','æ','Æ','ø','£','Ø','ƒ','ª','º','¿',
-                                     '®','½','¼','ß','µ','þ','ý','Ý');
+   _NORMAL_CHAR: array of string = ['a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A',
+                                    'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E',
+                                    'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I',
+                                    'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'O',
+                                    'u', 'u', 'u', 'u', 'U', 'U', 'U', 'U',
+                                    'c', 'C', 'n', 'N'];
 
-   _NORMAL_CHAR: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A',
-                                            'A', 'A', 'A', 'e', 'e', 'E', 'E',
-                                            'i', 'i', 'I', 'I', 'o', 'o', 'o',
-                                            'o', 'o', 'O', 'O', 'O', 'O', 'O',
-                                            'u', 'u', 'u', 'u', 'u', 'u', 'c',
-                                            'C', 'n', 'N');
+   _EXTRA_CHAR: array of string = ['<', '>', '!', '@', '#', '$', '%', '¨',
+                                   '&', '*', '(', ')', '_', '+', '=', '{',
+                                   '}', '[', ']', '?', ';', ':', ',', '|',
+                                   '*', '"', '~', '^', '´', '`', '¨', 'æ',
+                                   'Æ', 'ø', '£', 'Ø', 'ƒ', 'ª', 'º' ,'¿',
+                                   '®', '½', '¼', 'ß', 'µ', 'þ', 'ý', 'Ý'];
 
 var
   LText : string;
   I : Integer;
 begin
    LText := AValue;
-   for I:=1 to 38 do
+   for I := Low(_SPECIAL_CHAR) to High(_SPECIAL_CHAR) do
      LText := StringReplace(LText, _SPECIAL_CHAR[I], _NORMAL_CHAR[I], [rfreplaceall]);
 
    if (AExtras) then
    begin
-     for I:=1 to 48 do
+     for I := Low(_EXTRA_CHAR) to High(_EXTRA_CHAR) do
        LText := StringReplace(LText, _EXTRA_CHAR[I], '', [rfreplaceall]);
    end;
 
