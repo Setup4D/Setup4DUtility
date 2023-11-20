@@ -728,5 +728,11 @@ begin
       .Status(AHTTPStatus);
 end;
 
+initialization
+ {$IFDEF FPC}
+  // Define o CodePage para UTF-8
+  if not (DefaultSystemCodePage = CP_UTF8) then
+    DefaultSystemCodePage := CP_UTF8;
+  {$ENDIF}
 
 end.
