@@ -723,7 +723,9 @@ begin
     for I := 0 to LString.Count - 1 do
     begin
       if Length(LString[I]) > 2 then
-        LString[I] := UpperCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
+        LString[I] := UpperCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt))
+      else
+        LString[I] := LowerCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
     end;
     Result := LString.DelimitedText;
   finally
