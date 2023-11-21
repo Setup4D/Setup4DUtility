@@ -7,11 +7,15 @@ uses
   Horse.Exception,
 
   {$IF DEFINED(FPC)}
+  fpjson,
+  jsonparser,
   Classes,
   SysUtils;
   {$ELSE}
+  System.JSON,
   System.Classes,
-  System.SysUtils;
+  System.SysUtils,
+  System.Generics.Collections;
   {$ENDIF}
 
 type
@@ -467,6 +471,9 @@ type
     {$ENDIF}
     class function ProcessHorseExceptionMessage(
       AValue: Exception): string; overload;
+
+    class function FirstCapitalizeString(const AValue: string): string;
+    class function FirstCapitalizeJsonFields(const AJSONString: string): string;
   end;
 implementation
 
@@ -614,6 +621,68 @@ end;
 class function TSetup4DUtility.CharIsNum(const AValue: Char): Boolean;
 begin
   Result := CharInSet(AValue, ['0'..'9']) ;
+end;
+
+class function TSetup4DUtility.FirstCapitalizeJsonFields(
+  const AJSONString: string): string;
+var
+  LJSONObject, LNewJSONObject: TJSONObject;
+  I: Integer;
+  LKey: string;
+begin
+
+  // Original JSON:
+  // {"firstname": "john", "lastname": "doe", "address": "123 main street"}
+  //
+  // Modified JSON:
+  // { "firstname" : "John", "lastname" : "Doe", "address" : "123 Main Street" }
+
+  LJSONObject := {$IFDEF FPC}GetJSON{$ELSE}TJSONObject.ParseJSONValue{$ENDIF}(AJSONString) as TJSONObject;
+  LNewJSONObject := TJSONObject.Create;
+
+  try
+    for I := 0 to LJSONObject.Count - 1 do
+    begin
+      LKey := LJSONObject.{$IFDEF FPC}Names[i]{$ELSE}Pairs[I].JsonString.Value{$ENDIF};
+
+      if LJSONObject.{$IFDEF FPC}Items[i]{$ELSE}Pairs[I].JsonValue{$ENDIF} is TJSONString then
+        LNewJSONObject.{$IFDEF FPC}Add{$ELSE}AddPair{$ENDIF}(LKey, FirstCapitalizeString(LJSONObject.{$IFDEF FPC}Items[I].AsString{$ELSE}Pairs[I].JsonValue.Value{$ENDIF}))
+      else
+        LNewJSONObject.{$IFDEF FPC}Add{$ELSE}AddPair{$ENDIF}(LKey, LJSONObject.{$IFDEF FPC}Items[i]{$ELSE}Pairs[I].JsonValue{$ENDIF}.Clone {$IFNDEF FPC}as TJSONValue{$ENDIF});
+    end;
+
+    Result := LNewJSONObject.{$IFDEF FPC}AsJSON{$ELSE}ToJSON{$ENDIF};
+  finally
+    LNewJSONObject.Free;
+    LJSONObject.Free;
+  end;
+end;
+
+class function TSetup4DUtility.FirstCapitalizeString(
+  const AValue: string): string;
+var
+  LString: TStringList;
+  I: Integer;
+begin
+  {
+    Original: 123 main street
+
+    Modified: 123 Main Street
+  }
+
+  LString := TStringList.Create;
+  try
+    LString.Delimiter := ' ';
+    LString.DelimitedText := AValue;
+    for I := 0 to LString.Count - 1 do
+    begin
+      if Length(LString[I]) > 2 then
+        LString[I] := UpperCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
+    end;
+    Result := LString.DelimitedText;
+  finally
+    LString.Free;
+  end;
 end;
 
 class function TSetup4DUtility.GetDate: string;
