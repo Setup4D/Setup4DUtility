@@ -472,8 +472,54 @@ type
     class function ProcessHorseExceptionMessage(
       AValue: Exception): string; overload;
 
-    class function FirstCapitalizeString(const AValue: string): string;
-    class function FirstCapitalizeJsonFields(const AJSONString: string): string;
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte a primeira letra de cada campo de uma string JSON para maiúscula.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// A string JSON a ser modificada.
+    /// </param>
+    /// <returns>
+    /// A string JSON com a primeira letra de cada campo convertida.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Capitalizes the first letter of each field in a JSON string.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// The JSON string to be modified.
+    /// </param>
+    /// <returns>
+    /// The JSON string with the first letter of each field capitalized.
+    /// </returns>
+    {$ENDIF}
+    class function FirstCapitalizeJsonFields(
+      const AJSONString: string): string;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte a primeira letra de uma string para maiúscula.
+    /// </summary>
+    /// <param name="AValue">
+    /// A string a ser modificada.
+    /// </param>
+    /// <returns>
+    /// A string com a primeira letra convertida.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Capitalizes the first letter of a string.
+    /// </summary>
+    /// <param name="AValue">
+    /// The string to be modified.
+    /// </param>
+    /// <returns>
+    /// The string with the first letter capitalized.
+    /// </returns>
+    {$ENDIF}
+    class function FirstCapitalizeString(
+      const AValue: string): string;
+
   end;
 implementation
 
