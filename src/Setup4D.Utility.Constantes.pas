@@ -8,6 +8,8 @@ type
     class function MAX_USER_CONNECTIONS: string;
     class function FOREGIN_KEY_FAILS: string;
     class function NO_RECORDS_FOUND: string;
+    class function INVALID_NUMEBER: string;
+    class function NO_KEY : string;
     class function REQUIRED_INFORMATION: string; overload;
     class function REQUIRED_INFORMATION(AField: string): string; overload;
     class function MESSAGE_GENERIC(const AMessage: string): string;
@@ -41,6 +43,18 @@ begin
 
 end;
 
+class function TSetup4DUtilityConstantes.INVALID_NUMEBER: string;
+begin
+{$IFDEF HAS_PORTUGUES}
+  Result := 'O valor informado não é um número válido.';
+
+{$ELSE}
+  Result := 'The value provided is not a valid number.';
+
+{$ENDIF}
+
+end;
+
 class function TSetup4DUtilityConstantes.MAX_USER_CONNECTIONS: string;
 begin
 {$IFDEF HAS_PORTUGUES}
@@ -66,6 +80,16 @@ begin
 {$ENDIF}
 
   Result := Format(Result, [AMessage])
+end;
+
+class function TSetup4DUtilityConstantes.NO_KEY: string;
+begin
+{$IFDEF HAS_PORTUGUES}
+  Result := 'Chave inexistente.';
+
+{$ELSE}
+  Result := 'No Key.';
+{$ENDIF}
 end;
 
 class function TSetup4DUtilityConstantes.NO_RECORDS_FOUND: string;

@@ -3,6 +3,7 @@
 interface
 
 uses
+  Horse.Request,
   Horse.Commons,
   Horse.Exception,
 
@@ -494,7 +495,55 @@ type
     /// </returns>
     {$ENDIF}
     class function FirstCapitalizeJsonFields(
-      const AJSONString: string): string;
+      const AJSONString: string): string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte a primeira letra de cada campo de uma string JSON para maiúscula.
+    /// </summary>
+    /// <param name="AJSON">
+    /// O JSON a ser modificada.
+    /// </param>
+    /// <returns>
+    /// A string JSON com a primeira letra de cada campo convertida.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Capitalizes the first letter of each field in a JSON string.
+    /// </summary>
+    /// <param name="AJSON">
+    /// The JSON to be modified.
+    /// </param>
+    /// <returns>
+    /// The JSON string with the first letter of each field capitalized.
+    /// </returns>
+    {$ENDIF}
+    class function FirstCapitalizeJsonFields(
+      const AJSON: TJSONObject): TJSONObject; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Converte a primeira letra de cada campo de uma string JSON para maiúscula.
+    /// </summary>
+    /// <param name="AJSON">
+    /// O JSON a ser modificada.
+    /// </param>
+    /// <returns>
+    /// A string JSON com a primeira letra de cada campo convertida.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Capitalizes the first letter of each field in a JSON string.
+    /// </summary>
+    /// <param name="AJSON">
+    /// The JSON to be modified.
+    /// </param>
+    /// <returns>
+    /// The JSON string with the first letter of each field capitalized.
+    /// </returns>
+    {$ENDIF}
+    class function FirstCapitalizeJsonFields(
+      const AJSON: TJSONArray): TJSONArray; overload;
 
     {$IFDEF HAS_PORTUGUES}
     /// <summary>
@@ -519,6 +568,144 @@ type
     {$ENDIF}
     class function FirstCapitalizeString(
       const AValue: string): string;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Obtém o valor de um cabeçalho HTTP específico da solicitação, retornando uma string.
+    /// </summary>
+    /// <param name="AReq">
+    /// A instância da solicitação (THorseRequest) que contém os cabeçalhos.
+    /// </param>
+    /// <param name="AKey">
+    /// A chave do cabeçalho HTTP desejado.
+    /// </param>
+    /// <returns>
+    /// O valor do cabeçalho HTTP como uma string.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Gets the value of a specific HTTP header from the request, returning a string.
+    /// </summary>
+    /// <param name="AReq">
+    /// The request instance (THorseRequest) that contains the headers.
+    /// </param>
+    /// <param name="AKey">
+    /// The key of the desired HTTP header.
+    /// </param>
+    /// <returns>
+    /// The value of the HTTP header as a string.
+    /// </returns>
+    {$ENDIF}
+    class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+      AKey: string): string; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Obtém o valor de um cabeçalho HTTP específico da solicitação, retornando um Int64.
+    /// </summary>
+    /// <param name="AReq">
+    /// A instância da solicitação (THorseRequest) que contém os cabeçalhos.
+    /// </param>
+    /// <param name="AKey">
+    /// A chave do cabeçalho HTTP desejado.
+    /// </param>
+    /// <param name="ADefault">
+    /// O valor padrão a ser retornado se o cabeçalho não estiver presente.
+    /// </param>
+    /// <returns>
+    /// O valor do cabeçalho HTTP como um Int64.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Gets the value of a specific HTTP header from the request, returning an Int64.
+    /// </summary>
+    /// <param name="AReq">
+    /// The request instance (THorseRequest) that contains the headers.
+    /// </param>
+    /// <param name="AKey">
+    /// The key of the desired HTTP header.
+    /// </param>
+    /// <param name="ADefault">
+    /// The default value to be returned if the header is not present.
+    /// </param>
+    /// <returns>
+    /// The value of the HTTP header as an Int64.
+    /// </returns>
+    {$ENDIF}
+    class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+      AKey: string; ADefault: Int64): Int64; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Obtém o valor de um cabeçalho HTTP específico da solicitação, retornando um Boolean.
+    /// </summary>
+    /// <param name="AReq">
+    /// A instância da solicitação (THorseRequest) que contém os cabeçalhos.
+    /// </param>
+    /// <param name="AKey">
+    /// A chave do cabeçalho HTTP desejado.
+    /// </param>
+    /// <param name="ADefault">
+    /// O valor padrão a ser retornado se o cabeçalho não estiver presente.
+    /// </param>
+    /// <returns>
+    /// O valor do cabeçalho HTTP como um Boolean.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Gets the value of a specific HTTP header from the request, returning a Boolean.
+    /// </summary>
+    /// <param name="AReq">
+    /// The request instance (THorseRequest) that contains the headers.
+    /// </param>
+    /// <param name="AKey">
+    /// The key of the desired HTTP header.
+    /// </param>
+    /// <param name="ADefault">
+    /// The default value to be returned if the header is not present.
+    /// </param>
+    /// <returns>
+    /// The value of the HTTP header as a Boolean.
+    /// </returns>
+    {$ENDIF}
+    class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+      AKey: string; ADefault: Boolean): Boolean; overload;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Obtém o valor de um cabeçalho HTTP específico da solicitação, retornando um Extended.
+    /// </summary>
+    /// <param name="AReq">
+    /// A instância da solicitação (THorseRequest) que contém os cabeçalhos.
+    /// </param>
+    /// <param name="AKey">
+    /// A chave do cabeçalho HTTP desejado.
+    /// </param>
+    /// <param name="ADefault">
+    /// O valor padrão a ser retornado se o cabeçalho não estiver presente.
+    /// </param>
+    /// <returns>
+    /// O valor do cabeçalho HTTP como um Extended.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Gets the value of a specific HTTP header from the request, returning an Extended.
+    /// </summary>
+    /// <param name="AReq">
+    /// The request instance (THorseRequest) that contains the headers.
+    /// </param>
+    /// <param name="AKey">
+    /// The key of the desired HTTP header.
+    /// </param>
+    /// <param name="ADefault">
+    /// The default value to be returned if the header is not present.
+    /// </param>
+    /// <returns>
+    /// The value of the HTTP header as an Extended.
+    /// </returns>
+    {$ENDIF}
+    class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+      AKey: string; ADefault: Extended): Extended; overload;
 
   end;
 implementation
@@ -550,9 +737,9 @@ begin
 
       while Assigned(LXMLNode) do
       begin
-        if LXMLNode.NodeName = ATag then
+        if LXMLNode.NodeName = UnicodeString(ATag) then
         begin
-          Result := LXMLNode.TextContent;
+          Result := String(LXMLNode.TextContent);
           Break;
         end;
         LXMLNode := LXMLNode.NextSibling;
@@ -704,11 +891,81 @@ begin
   end;
 end;
 
+class function TSetup4DUtility.FirstCapitalizeJsonFields(
+  const AJSON: TJSONObject): TJSONObject;
+var
+  I: Integer;
+  {$IFNDEF FPC}
+  LPair: TJSONPair;
+  {$ENDIF}
+  LKey: string;
+  LValue: {$IFDEF FPC}TJSONData{$ELSE}TJSONValue{$ENDIF};
+  LNewJSONObject: TJSONObject;
+begin
+  // Original JSON:
+  // {"firstname": "john", "lastname": "doe", "address": "123 main street"}
+  //
+  // Modified JSON:
+  // { "firstname" : "John", "lastname" : "Doe", "address" : "123 Main Street" }
+
+
+  LNewJSONObject := TJSONObject.Create;
+
+  for I := 0 to AJSON.Count - 1 do
+  begin
+    {$IFNDEF FPC}
+    LPair := AJSON.Pairs[I];
+    {$ENDIF}
+    LKey := {$IFDEF FPC}AJSON.Names[I]{$ELSE}LPair.JsonString.Value{$ENDIF};
+    LValue := {$IFDEF FPC}AJSON.Items[I]{$ELSE}LPair.JsonValue{$ENDIF};
+
+    if LValue is TJSONString then
+      LNewJSONObject.{$IFDEF FPC}Add{$ELSE}AddPair{$ENDIF}(LKey, FirstCapitalizeString({$IFDEF FPC}TJSONString({$ENDIF}LValue{$IFDEF FPC}){$ENDIF}.{$IFDEF FPC}AsString{$ELSE}Value{$ENDIF}))
+    else if LValue is TJSONObject then
+      LNewJSONObject.{$IFDEF FPC}Add{$ELSE}AddPair{$ENDIF}(LKey, FirstCapitalizeJsonFields(TJSONObject(LValue.Clone)))
+    else
+      LNewJSONObject.{$IFDEF FPC}Add{$ELSE}AddPair{$ENDIF}(LKey, {$IFNDEF FPC}TJSONValue({$ENDIF}LValue.Clone{$IFNDEF FPC}){$ENDIF});
+  end;
+
+  Result := LNewJSONObject;
+
+end;
+
+class function TSetup4DUtility.FirstCapitalizeJsonFields(
+  const AJSON: TJSONArray): TJSONArray;
+var
+  LJSONArray, LNewJSONArray: TJSONArray;
+  I: Integer;
+begin
+  LJSONArray := AJSON;
+  LNewJSONArray := TJSONArray.Create;
+
+  try
+    for I := 0 to LJSONArray.Count - 1 do
+    begin
+      if LJSONArray[I] is TJSONObject then
+      begin
+        {$IFDEF FPC}LNewJSONArray[I] := {$ELSE}LNewJSONArray.AddElement({$ENDIF}FirstCapitalizeJsonFields(LJSONArray[I] as TJSONObject){$IFNDEF FPC}){$ENDIF};
+      end
+      else
+      begin
+        {$IFDEF FPC}LNewJSONArray[I] := {$ELSE}LNewJSONArray.AddElement({$ENDIF}LJSONArray[I]{$IFNDEF FPC}){$ENDIF};
+      end;
+    end;
+
+    Result := LNewJSONArray;
+  finally
+    LJSONArray.Free;
+  end;
+end;
+
 class function TSetup4DUtility.FirstCapitalizeString(
   const AValue: string): string;
 var
   LString: TStringList;
+  LSubString : String;
   I: Integer;
+  J: Integer;
 begin
   {
     Original: 123 main street
@@ -723,16 +980,29 @@ begin
     for I := 0 to LString.Count - 1 do
     begin
       if Length(LString[I]) > 2 then
-        LString[I] := UpperCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt))
+      begin
+        LString[I] := UpperCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
+        LSubString := LString[I];
+        for J := 1 to Length(LSubString) - 1 do
+        begin
+          if (LSubString[J] = '-') or (LSubString[J] = '/') then
+            LSubString[J + 1] := UpCase(LSubString[J + 1]);
+        end;
+        LString[I] := LSubString;
+      end
       else
-        LString[I] := LowerCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
+      begin
+        if LString[I].Length = 1 then
+          LString[I] := UpperCase(LString[I][1])
+        else if AValue.Length > 2 then
+          LString[I] := LowerCase(LString[I][1]) + LowerCase(Copy(LString[I], 2, MaxInt));
+      end;
     end;
     Result := LString.DelimitedText;
   finally
     LString.Free;
   end;
 end;
-
 class function TSetup4DUtility.GetDate: string;
 begin
   Result := GetDate(Now);
@@ -752,6 +1022,144 @@ class function TSetup4DUtility.GetDateTime: string;
 begin
   Result := GetDateTime(Now);
 end;
+
+
+class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+  AKey: string): string;
+{$IFDEF HORSE_CGI}
+var
+   LKey : String;
+{$ENDIF}
+begin
+  {$IFDEF HORSE_CGI}
+  LKey := StringReplace(AKey, '-', '_', [rfreplaceall]);
+  LKey := StringReplace(LKey, ' ', '_', [rfreplaceall]);
+  LKey := LKey.ToUpper;
+;
+  Result := GetEnvironmentVariable(Format('HTTP_%s', [LKey]));
+  {$ELSE}
+  if AReq.Headers.ContainsKey(AKey) then
+    Result := AReq.Headers.Field(AKey).AsString;
+  {$ENDIF}
+end;
+
+class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+  AKey: string; ADefault: Int64): Int64;
+{$IFDEF HORSE_CGI}
+var
+  LValue : Int64;
+  LHeader : String;
+  LKey : String;
+{$ENDIF}
+begin
+  {$IFDEF HORSE_CGI}
+  try
+    LKey := StringReplace(AKey, '-', '_', [rfreplaceall]);
+    LKey := StringReplace(LKey, ' ', '_', [rfreplaceall]);
+    LKey := LKey.ToUpper;
+
+    LHeader := GetEnvironmentVariable(Format('HTTP_%s', [LKey]));
+
+    if LHeader.IsEmpty then
+      Result := ADefault;
+
+
+    if Result = ADefault then
+      Exit;
+
+    LValue := StrToInt64(LHeader);
+    Result := LValue;
+  except
+    raise Exception.Create(TSetup4DUtilityConstantes.INVALID_NUMEBER);
+  end;
+  {$ELSE}
+  if AReq.Headers.ContainsKey(AKey) then
+    Result := AReq.Headers.Field(AKey).AsInt64
+  else
+    Result := ADefault;
+  {$ENDIF}
+end;
+
+class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+  AKey: string; ADefault: Boolean): Boolean;
+{$IFDEF HORSE_CGI}
+var
+  LValue : Boolean;
+  LHeader : String;
+  LKey : String;
+{$ENDIF}
+begin
+  {$IFDEF HORSE_CGI}
+  try
+    LKey := StringReplace(AKey, '-', '_', [rfreplaceall]);
+    LKey := StringReplace(LKey, ' ', '_', [rfreplaceall]);
+    LKey := LKey.ToUpper;
+
+    LHeader := GetEnvironmentVariable(Format('HTTP_%s', [LKey]));
+
+    Result := ADefault;
+
+
+    if LHeader.ToUpper[1] in ['T', 'S'] then
+      Result := True;
+
+    if LHeader.ToUpper[1] in ['F', 'N'] then
+      Result := False;
+
+
+    if LHeader.IsEmpty then
+      Result := ADefault;
+
+  except
+    raise Exception.Create(TSetup4DUtilityConstantes.INVALID_NUMEBER);
+  end;
+  {$ELSE}
+  if AReq.Headers.ContainsKey(AKey) then
+    Result := AReq.Headers.Field(AKey).AsBoolean
+  else
+    Result := ADefault;
+  {$ENDIF}
+
+
+end;
+
+class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
+  AKey: string; ADefault: Extended): Extended;
+{$IFDEF HORSE_CGI}
+var
+  LValue : Extended;
+  LHeader : String;
+  LKey : String;
+{$ENDIF}
+begin
+  {$IFDEF HORSE_CGI}
+  try
+    LKey := StringReplace(AKey, '-', '_', [rfreplaceall]);
+    LKey := StringReplace(LKey, ' ', '_', [rfreplaceall]);
+    LKey := LKey.ToUpper;
+
+    LHeader := GetEnvironmentVariable(Format('HTTP_%s', [LKey]));
+
+    if LHeader.IsEmpty then
+      Result := ADefault;
+
+
+    if Result = ADefault then
+      Exit;
+
+    LValue := StrToFloat(LHeader);
+    Result := LValue;
+  except
+    raise Exception.Create(TSetup4DUtilityConstantes.INVALID_NUMEBER);
+  end;
+  {$ELSE}
+  if AReq.Headers.ContainsKey(AKey) then
+    Result := AReq.Headers.Field(AKey).AsExtended
+  else
+    Result := ADefault;
+  {$ENDIF}
+end;
+
 
 class function TSetup4DUtility.GetTime: string;
 begin
