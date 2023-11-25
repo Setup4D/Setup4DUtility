@@ -9,6 +9,7 @@ type
     class function FOREGIN_KEY_FAILS: string;
     class function NO_RECORDS_FOUND: string;
     class function INVALID_NUMEBER: string;
+    class function INVALID_BOOLEAN: string;
     class function NO_KEY : string;
     class function REQUIRED_INFORMATION: string; overload;
     class function REQUIRED_INFORMATION(AField: string): string; overload;
@@ -43,14 +44,23 @@ begin
 
 end;
 
+class function TSetup4DUtilityConstantes.INVALID_BOOLEAN: string;
+begin
+{$IFDEF HAS_PORTUGUES}
+  Result := 'Valor booleano inválido ou não reconhecido.';
+
+{$ELSE}
+  Result := 'Invalid or unrecognized boolean value.';
+{$ENDIF}
+
+end;
+
 class function TSetup4DUtilityConstantes.INVALID_NUMEBER: string;
 begin
 {$IFDEF HAS_PORTUGUES}
-  Result := 'O valor informado não é um número válido.';
-
+  Result := 'Número fornecido é inválido ou não reconhecido.';
 {$ELSE}
-  Result := 'The value provided is not a valid number.';
-
+  Result := 'The provided number is invalid or not recognized.';
 {$ENDIF}
 
 end;
@@ -85,10 +95,10 @@ end;
 class function TSetup4DUtilityConstantes.NO_KEY: string;
 begin
 {$IFDEF HAS_PORTUGUES}
-  Result := 'Chave inexistente.';
+  Result := 'Chave ausente ou não encontrada.';
 
 {$ELSE}
-  Result := 'No Key.';
+  Result := 'Key missing or not found.';
 {$ENDIF}
 end;
 
@@ -119,9 +129,9 @@ end;
 class function TSetup4DUtilityConstantes.REQUIRED_INFORMATION: string;
 begin
 {$IFDEF HAS_PORTUGUES}
-  Result := 'A informação é obrigatória. Por favor, informe-a.';
+  Result := 'Informação necessária não fornecida. Por favor, informe-a.';
 {$ELSE}
-  Result := 'The information is required. Please submit it.';
+  Result := 'Required information not provided. Please provide it..';
 {$ENDIF}
 end;
 

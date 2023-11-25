@@ -1023,7 +1023,6 @@ begin
   Result := GetDateTime(Now);
 end;
 
-
 class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
   AKey: string): string;
 {$IFDEF HORSE_CGI}
@@ -1052,6 +1051,7 @@ var
   LKey : String;
 {$ENDIF}
 begin
+
   {$IFDEF HORSE_CGI}
   try
     LKey := StringReplace(AKey, '-', '_', [rfreplaceall]);
@@ -1084,7 +1084,6 @@ class function TSetup4DUtility.GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseReque
   AKey: string; ADefault: Boolean): Boolean;
 {$IFDEF HORSE_CGI}
 var
-  LValue : Boolean;
   LHeader : String;
   LKey : String;
 {$ENDIF}
@@ -1097,8 +1096,11 @@ begin
 
     LHeader := GetEnvironmentVariable(Format('HTTP_%s', [LKey]));
 
-    Result := ADefault;
+    if LHeader.IsEmpty then
+      Result := ADefault;
 
+    if Result = ADefault then
+      Exit;
 
     if LHeader.ToUpper[1] in ['T', 'S'] then
       Result := True;
@@ -1106,12 +1108,8 @@ begin
     if LHeader.ToUpper[1] in ['F', 'N'] then
       Result := False;
 
-
-    if LHeader.IsEmpty then
-      Result := ADefault;
-
   except
-    raise Exception.Create(TSetup4DUtilityConstantes.INVALID_NUMEBER);
+    raise Exception.Create(TSetup4DUtilityConstantes.INVALID_BOOLEAN);
   end;
   {$ELSE}
   if AReq.Headers.ContainsKey(AKey) then
@@ -1159,7 +1157,6 @@ begin
     Result := ADefault;
   {$ENDIF}
 end;
-
 
 class function TSetup4DUtility.GetTime: string;
 begin
