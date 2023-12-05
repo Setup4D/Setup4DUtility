@@ -213,7 +213,122 @@ This overload of the `ProcessHorseExceptionMessage` function takes an exception 
 **Parameters:**
 - `AValue`: The exception to be processed.
 - `AHTTPStatus`: The HTTP status to be assigned to the thrown exception.
+#### `class function FirstCapitalizeJsonFields(const AJSONString: string): string;`
 
+This function takes a JSON string and returns a new JSON string with fields converted to the format where the first letter of each word is capitalized.
+
+- **Parameters:**
+  - `AJSONString`: The original JSON string.
+
+- **Result:**
+  - A new JSON string with capitalized fields.
+
+#### `class function FirstCapitalizeJsonFields(const AJSON: TJSONObject): TJSONObject;`
+
+This function takes a JSON object and returns a new JSON object with fields converted to the format where the first letter of each word is capitalized.
+
+- **Parameters:**
+  - `AJSON`: The original JSON object.
+
+- **Result:**
+  - A new JSON object with capitalized fields.
+
+#### `class function FirstCapitalizeString(const AValue: string): string;`
+
+This function takes a string and returns a new string with the first letter of each word capitalized.
+
+- **Parameters:**
+  - `AValue`: The original string.
+
+- **Result:**
+  - A new string with the first letter of each word capitalized.
+
+### ℹ️ Notes
+
+- The `FirstCapitalizeJsonFields` functions operate with both JSON strings and JSON objects.
+- The `FirstCapitalizeString` function capitalizes the first letter of each word in the string, considering some exceptions for special characters like hyphens and slashes.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string): string;`
+
+This function returns the value associated with the specified key in the HTTP header.
+
+- **Parameters:**
+  - `AReq`: THorseRequest object (optional, depending on the directive).
+  - `AKey`: The key for which to retrieve the header value.
+
+- **Result:**
+  - A string containing the value of the header associated with the specified key.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Int64): Int64;`
+
+This function returns the value associated with the specified key in the HTTP header as a 64-bit integer.
+
+- **Parameters:**
+  - `AReq`: THorseRequest object (optional, depending on the directive).
+  - `AKey`: The key for which to retrieve the header value.
+  - `ADefault`: Default value to be returned if the header does not exist or is not an integer.
+
+- **Result:**
+  - A 64-bit integer containing the value of the header associated with the specified key or the default value if the key does not exist or is not an integer.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Boolean): Boolean;`
+
+This function returns the value associated with the specified key in the HTTP header as a boolean.
+
+- **Parameters:**
+  - `AReq`: THorseRequest object (optional, depending on the directive).
+  - `AKey`: The key for which to retrieve the header value.
+  - `ADefault`: Default value to be returned if the header does not exist or is not a boolean.
+
+- **Result:**
+  - A boolean containing the value of the header associated with the specified key or the default value if the key does not exist or is not a boolean.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Extended): Extended;`
+
+This function returns the value associated with the specified key in the HTTP header as a floating-point number.
+
+- **Parameters:**
+  - `AReq`: THorseRequest object (optional, depending on the directive).
+  - `AKey`: The key for which to retrieve the header value.
+  - `ADefault`: Default value to be returned if the header does not exist or is not a floating-point number.
+
+- **Result:**
+  - A floating-point number containing the value of the header associated with the specified key or the default value if the key does not exist or is not a floating-point number.
+
+### ℹ️ Notes
+
+- The functions use the CGI environment to get header values when compiled with the `HORSE_CGI` directive.
+- In non-CGI environments (like Horse), the functions use `THorseRequest` objects to get header values.
+
+#### `class function IsValidJSONObject(const AJSONString: string): Boolean;`
+
+This function checks if the provided string represents a valid JSON object.
+
+- **Parameters:**
+  - `AJSONString`: The JSON string to be validated.
+
+- **Result:**
+  - A boolean indicating whether the string represents a valid JSON object.
+
+#### `class function IsValidJSONArray(const AJSONString: string): Boolean;`
+
+This function checks if the provided string represents a valid JSON array.
+
+- **Parameters:**
+  - `AJSONString`: The JSON string to be validated.
+
+- **Result:**
+  - A boolean indicating whether the string represents a valid JSON array.
+
+#### `class function IsEmpty(const AValue: string): Boolean;`
+
+This function checks if a string is empty after removing spaces.
+
+- **Parameters:**
+  - `AValue`: The string to be checked.
+
+- **Result:**
+  - A boolean indicating whether the string, after removing spaces, is empty.
   
 ### 🌱 Usage Example
 
@@ -399,3 +514,193 @@ begin
   end;
 end;
 ```
+## 📐Function of TSetup4DUtilityConstants
+
+The class `TSetup4DUtilityConstants` provides constants and default error messages for application development. Below are some of the functions offered by this class, along with their descriptions.
+
+### ⚙️ Related Functions and Messages
+
+#### `class function FOREGIN_KEY_FAILS: string;`
+
+This function returns a standard error message in case of failure when attempting to use a foreign key.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function INVALID_BOOLEAN: string;`
+
+This function returns a message indicating that the provided boolean value is invalid or unrecognized.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function INVALID_DATA: string;`
+
+This function returns a message indicating that the provided data is invalid.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function INVALID_NUMBER: string;`
+
+This function returns a message indicating that the provided number is invalid or unrecognized.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function MAX_USER_CONNECTIONS: string;`
+
+This function returns a message informing that the system is undergoing maintenance and asks the user to wait before trying again.
+
+- **Result:**
+  - A string containing the informational message about maintenance.
+
+#### `class function MESSAGE_GENERIC: string;`
+
+This function returns a generic message indicating that the system is temporarily unavailable.
+
+- **Result:**
+  - A string containing the generic unavailability message.
+
+#### `class function MESSAGE_GENERIC(const AMessage: string): string;`
+
+This function returns a generic message, including a specific message provided as a parameter.
+
+- **Parameters:**
+  - `AMessage`: A specific message to be included in the generic message.
+
+- **Result:**
+  - A string containing the generic message with the formatted specific message.
+
+#### `class function NO_KEY: string;`
+
+This function returns a message indicating that the key is missing or not found.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_DATA_FOUND: string;`
+
+This function returns a message indicating that no information was located.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_RECORDS_FOUND: string;`
+
+This function returns a message indicating that no records were located.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_RESOURCE_FOUND: string;`
+
+This function returns a message indicating that the requested resource was not found on the server.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function REQUIRED_INFORMATION(AField: string): string;`
+
+This function returns a message indicating that information in a specific field is required.
+
+- **Parameters:**
+  - `AField`: The field for which information is required.
+
+- **Result:**
+  - A string containing the formatted error message with the specific field.
+#### `class function UNINSTANTIATED_CLASS(AClass: string): string;`
+
+This function returns a message indicating that the specified class has not been instantiated.
+
+- **Parameters:**
+  - `AClass`: The name of the uninstantiated class.
+
+- **Result:**
+  - A string containing the formatted error message with the class name.
+
+#### `class function UNINSTANTIATED_CLASS: string;`
+
+This function returns a message indicating that the class has not been instantiated.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function REQUIRED_INFORMATION: string;`
+
+This function returns a message indicating that the required information has not been provided.
+
+- **Result:**
+  - A string containing the error message.
+
+Each of these functions provides standardized messages for specific situations, promoting consistency in error communication and informative messages in applications using the `TSetup4DUtilityConstants` class.
+
+### 📐Function of TSetup4DUtilityConstants (Continuation)
+
+The `TSetup4DUtilityConstants` class continues to provide constants and default error messages for application development. Here are some more functions from this class, along with their descriptions.
+
+### ⚙️ Related Functions and Messages
+
+#### `class function NO_KEY: string;`
+
+This function returns a message indicating that the key is missing or not found.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_DATA_FOUND: string;`
+
+This function returns a message indicating that no information was located.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_RECORDS_FOUND: string;`
+
+This function returns a message indicating that no records were located.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function NO_RESOURCE_FOUND: string;`
+
+This function returns a message indicating that the requested resource was not found on the server.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function REQUIRED_INFORMATION(AField: string): string;`
+
+This function returns a message indicating that information in a specific field is required.
+
+- **Parameters:**
+  - `AField`: The field for which information is required.
+
+- **Result:**
+  - A string containing the formatted error message with the specific field.
+
+#### `class function UNINSTANTIATED_CLASS(AClass: string): string;`
+
+This function returns a message indicating that the specified class has not been instantiated.
+
+- **Parameters:**
+  - `AClass`: The name of the uninstantiated class.
+
+- **Result:**
+  - A string containing the formatted error message with the class name.
+
+#### `class function UNINSTANTIATED_CLASS: string;`
+
+This function returns a message indicating that the class has not been instantiated.
+
+- **Result:**
+  - A string containing the error message.
+
+#### `class function REQUIRED_INFORMATION: string;`
+
+This function returns a message indicating that the required information has not been provided.
+
+- **Result:**
+  - A string containing the error message.
+
+ℹ️ Each of these functions contributes to the consistency and clarity of error and informational messages in applications using the `TSetup4DUtilityConstants` class.

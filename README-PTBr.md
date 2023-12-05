@@ -213,7 +213,123 @@ Esta sobrecarga da função `ProcessHorseExceptionMessage` recebe uma exceção 
 - `AValue`: A exceção a ser processada.
 - `AHTTPStatus`: O status HTTP a ser atribuído à exceção lançada.
 
-  
+#### `class function FirstCapitalizeJsonFields(const AJSONString: string): string;`
+
+Esta função recebe uma string JSON e retorna uma nova string JSON com os campos convertidos para o formato onde a primeira letra de cada palavra é maiúscula.
+
+- **Parâmetros:**
+  - `AJSONString`: A string JSON original.
+
+- **Resultado:**
+  - Uma nova string JSON com os campos capitalizados.
+
+#### `class function FirstCapitalizeJsonFields(const AJSON: TJSONObject): TJSONObject;`
+
+Esta função recebe um objeto JSON e retorna um novo objeto JSON com os campos convertidos para o formato onde a primeira letra de cada palavra é maiúscula.
+
+- **Parâmetros:**
+  - `AJSON`: O objeto JSON original.
+
+- **Resultado:**
+  - Um novo objeto JSON com os campos capitalizados.
+
+#### `class function FirstCapitalizeString(const AValue: string): string;`
+
+Esta função recebe uma string e retorna uma nova string com a primeira letra de cada palavra em maiúscula.
+
+- **Parâmetros:**
+  - `AValue`: A string original.
+
+- **Resultado:**
+  - Uma nova string com a primeira letra de cada palavra em maiúscula.
+
+### ℹ️ Observações
+
+- As funções `FirstCapitalizeJsonFields` operam tanto com strings JSON quanto com objetos JSON.
+- A função `FirstCapitalizeString` capitaliza a primeira letra de cada palavra na string, considerando algumas exceções para caracteres especiais como hífens e barras.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string): string;`
+
+Esta função retorna o valor associado à chave especificada no cabeçalho HTTP.
+
+- **Parâmetros:**
+  - `AReq`: Objeto de solicitação THorseRequest (opcional, dependendo da diretiva).
+  - `AKey`: A chave para a qual se deseja obter o valor do cabeçalho.
+
+- **Resultado:**
+  - Uma string contendo o valor do cabeçalho associado à chave especificada.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Int64): Int64;`
+
+Esta função retorna o valor associado à chave especificada no cabeçalho HTTP como um número inteiro de 64 bits.
+
+- **Parâmetros:**
+  - `AReq`: Objeto de solicitação THorseRequest (opcional, dependendo da diretiva).
+  - `AKey`: A chave para a qual se deseja obter o valor do cabeçalho.
+  - `ADefault`: Valor padrão a ser retornado caso o cabeçalho não exista ou não seja um número inteiro.
+
+- **Resultado:**
+  - Um número inteiro de 64 bits contendo o valor do cabeçalho associado à chave especificada ou o valor padrão se a chave não existir ou não for um número inteiro.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Boolean): Boolean;`
+
+Esta função retorna o valor associado à chave especificada no cabeçalho HTTP como um booleano.
+
+- **Parâmetros:**
+  - `AReq`: Objeto de solicitação THorseRequest (opcional, dependendo da diretiva).
+  - `AKey`: A chave para a qual se deseja obter o valor do cabeçalho.
+  - `ADefault`: Valor padrão a ser retornado caso o cabeçalho não exista ou não seja um booleano.
+
+- **Resultado:**
+  - Um booleano contendo o valor do cabeçalho associado à chave especificada ou o valor padrão se a chave não existir ou não for um booleano.
+
+#### `class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF} AKey: string; ADefault: Extended): Extended;`
+
+Esta função retorna o valor associado à chave especificada no cabeçalho HTTP como um número de ponto flutuante.
+
+- **Parâmetros:**
+  - `AReq`: Objeto de solicitação THorseRequest (opcional, dependendo da diretiva).
+  - `AKey`: A chave para a qual se deseja obter o valor do cabeçalho.
+  - `ADefault`: Valor padrão a ser retornado caso o cabeçalho não exista ou não seja um número de ponto flutuante.
+
+- **Resultado:**
+  - Um número de ponto flutuante contendo o valor do cabeçalho associado à chave especificada ou o valor padrão se a chave não existir ou não for um número de ponto flutuante.
+
+### ℹ️ Observações
+
+- As funções utilizam o ambiente CGI para obter os valores dos cabeçalhos quando compiladas com a diretiva `HORSE_CGI`.
+- Em ambientes não CGI (como Horse), as funções utilizam objetos `THorseRequest` para obter os valores dos cabeçalhos.
+
+#### `class function IsValidJSONObject(const AJSONString: string): Boolean;`
+
+Esta função verifica se a string fornecida representa um objeto JSON válido.
+
+- **Parâmetros:**
+  - `AJSONString`: A string JSON a ser validada.
+
+- **Resultado:**
+  - Um booleano indicando se a string representa um objeto JSON válido.
+
+#### `class function IsValidJSONArray(const AJSONString: string): Boolean;`
+
+Esta função verifica se a string fornecida representa um array JSON válido.
+
+- **Parâmetros:**
+  - `AJSONString`: A string JSON a ser validada.
+
+- **Resultado:**
+  - Um booleano indicando se a string representa um array JSON válido.
+
+#### `class function IsEmpty(const AValue: string): Boolean;`
+
+Esta função verifica se uma string está vazia após a remoção dos espaços.
+
+- **Parâmetros:**
+  - `AValue`: A string a ser verificada.
+
+- **Resultado:**
+  - Um booleano indicando se a string, após a remoção de espaços, está vazia.
+    
 ### 🌱 Exemplo de Uso
 
 Aqui está um exemplo de como usar a classe `TSetup4DUtility`:
@@ -397,3 +513,195 @@ begin
   end;
 end;
 ```
+### 📐Função do TSetup4DUtilityConstantes
+
+A classe `TSetup4DUtilityConstantes` fornece constantes e mensagens de erro padrão para o desenvolvimento de aplicativos. Abaixo estão algumas das funções oferecidas por esta classe, juntamente com suas descrições.
+
+### ⚙️ Funções e Mensagens Relacionadas
+
+#### `class function FOREGIN_KEY_FAILS: string;`
+
+Esta função retorna uma mensagem padrão de erro em caso de falha ao tentar utilizar uma chave estrangeira.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function INVALID_BOOLEAN: string;`
+
+Esta função retorna uma mensagem indicando que o valor booleano fornecido é inválido ou não reconhecido.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function INVALID_DATA: string;`
+
+Esta função retorna uma mensagem indicando que os dados fornecidos são inválidos.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function INVALID_NUMEBER: string;`
+
+Esta função retorna uma mensagem indicando que o número fornecido é inválido ou não reconhecido.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function MAX_USER_CONNECTIONS: string;`
+
+Esta função retorna uma mensagem informando que o sistema está passando por manutenção e solicita ao usuário que aguarde antes de tentar novamente.
+
+- **Resultado:**
+  - Uma string contendo a mensagem informativa sobre a manutenção.
+
+#### `class function MESSAGE_GENERIC: string;`
+
+Esta função retorna uma mensagem genérica indicando que o sistema está temporariamente indisponível.
+
+- **Resultado:**
+  - Uma string contendo a mensagem genérica de indisponibilidade.
+
+#### `class function MESSAGE_GENERIC(const AMessage: string): string;`
+
+Esta função retorna uma mensagem genérica, incluindo uma mensagem específica fornecida como parâmetro.
+
+- **Parâmetros:**
+  - `AMessage`: Uma mensagem específica a ser incluída na mensagem genérica.
+
+- **Resultado:**
+  - Uma string contendo a mensagem genérica com a mensagem específica formatada.
+
+#### `class function NO_KEY: string;`
+
+Esta função retorna uma mensagem indicando que a chave está ausente ou não foi encontrada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_DATA_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que nenhuma informação foi localizada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_RECORDS_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que nenhum registro foi localizado.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_RESOURCE_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que o recurso solicitado não foi encontrado no servidor.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function REQUIRED_INFORMATION(AField: string): string;`
+
+Esta função retorna uma mensagem indicando que a informação em um campo específico é obrigatória.
+
+- **Parâmetros:**
+  - `AField`: O campo para o qual a informação é obrigatória.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro formatada com o campo específico.
+
+#### `class function UNINSTANTIATED_CLASS(AClass: string): string;`
+
+Esta função retorna uma mensagem indicando que a classe especificada não foi instanciada.
+
+- **Parâmetros:**
+  - `AClass`: O nome da classe não instanciada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro formatada com o nome da classe.
+
+#### `class function UNINSTANTIATED_CLASS: string;`
+
+Esta função retorna uma mensagem indicando que a classe não foi instanciada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function REQUIRED_INFORMATION: string;`
+
+Esta função retorna uma mensagem indicando que a informação necessária não foi fornecida.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+Cada uma dessas funções oferece mensagens padronizadas para situações específicas, promovendo consistência na comunicação de erros e mensagens informativas nos aplicativos que utilizam a classe `TSetup4DUtilityConstantes`.
+
+
+### 📐Função do TSetup4DUtilityConstantes (Continuação)
+
+A classe `TSetup4DUtilityConstantes` continua a oferecer constantes e mensagens de erro padrão para o desenvolvimento de aplicativos. Aqui estão mais algumas funções desta classe, juntamente com suas descrições.
+
+### ⚙️ Funções e Mensagens Relacionadas
+
+#### `class function NO_KEY: string;`
+
+Esta função retorna uma mensagem indicando que a chave está ausente ou não foi encontrada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_DATA_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que nenhuma informação foi localizada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_RECORDS_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que nenhum registro foi localizado.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function NO_RESOURCE_FOUND: string;`
+
+Esta função retorna uma mensagem indicando que o recurso solicitado não foi encontrado no servidor.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function REQUIRED_INFORMATION(AField: string): string;`
+
+Esta função retorna uma mensagem indicando que a informação em um campo específico é obrigatória.
+
+- **Parâmetros:**
+  - `AField`: O campo para o qual a informação é obrigatória.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro formatada com o campo específico.
+
+#### `class function UNINSTANTIATED_CLASS(AClass: string): string;`
+
+Esta função retorna uma mensagem indicando que a classe especificada não foi instanciada.
+
+- **Parâmetros:**
+  - `AClass`: O nome da classe não instanciada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro formatada com o nome da classe.
+
+#### `class function UNINSTANTIATED_CLASS: string;`
+
+Esta função retorna uma mensagem indicando que a classe não foi instanciada.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+#### `class function REQUIRED_INFORMATION: string;`
+
+Esta função retorna uma mensagem indicando que a informação necessária não foi fornecida.
+
+- **Resultado:**
+  - Uma string contendo a mensagem de erro.
+
+ℹ️ Cada uma dessas funções contribui para a consistência e clareza das mensagens de erro e informativas nos aplicativos que utilizam a classe `TSetup4DUtilityConstantes`.
