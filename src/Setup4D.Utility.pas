@@ -707,6 +707,75 @@ type
     class function GetHeadValue({$IFNDEF HORSE_CGI}AReq: THorseRequest;{$ENDIF}
       AKey: string; ADefault: Extended): Extended; overload;
 
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Verifica se a string JSON fornecida é um objeto JSON válido.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// A string JSON a ser verificada.
+    /// </param>
+    /// <returns>
+    /// True se a string JSON é um objeto JSON válido, False caso contrário.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Checks if the provided JSON string is a valid JSON object.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// The JSON string to be checked.
+    /// </param>
+    /// <returns>
+    /// True if the JSON string is a valid JSON object, False otherwise.
+    /// </returns>
+    {$ENDIF}
+    Class function IsValidJSONObject(const AJSONString: string): Boolean;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Verifica se a string JSON fornecida é um array JSON válido.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// A string JSON a ser verificada.
+    /// </param>
+    /// <returns>
+    /// True se a string JSON é um array JSON válido e não vazio, False caso contrário.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Checks if the provided JSON string is a valid JSON array.
+    /// </summary>
+    /// <param name="AJSONString">
+    /// The JSON string to be checked.
+    /// </param>
+    /// <returns>
+    /// True if the JSON string is a valid and non-empty JSON array, False otherwise.
+    /// </returns>
+    {$ENDIF}
+    Class function IsValidJSONArray(const AJSONString: string): Boolean;
+
+    {$IFDEF HAS_PORTUGUES}
+    /// <summary>
+    /// Verifica se a string fornecida está vazia após a remoção de espaços.
+    /// </summary>
+    /// <param name="AValue">
+    /// A string a ser verificada.
+    /// </param>
+    /// <returns>
+    /// True se a string estiver vazia após a remoção de espaços, False caso contrário.
+    /// </returns>
+    {$ELSE}
+    /// <summary>
+    /// Checks if the provided string is empty after removing spaces.
+    /// </summary>
+    /// <param name="AValue">
+    /// The string to be checked.
+    /// </param>
+    /// <returns>
+    /// True if the string is empty after removing spaces, False otherwise.
+    /// </returns>
+    {$ENDIF}
+    Class function IsEmpty(const AValue: string): Boolean;
+
   end;
 implementation
 
@@ -1003,6 +1072,7 @@ begin
     LString.Free;
   end;
 end;
+
 class function TSetup4DUtility.GetDate: string;
 begin
   Result := GetDate(Now);
@@ -1177,6 +1247,53 @@ begin
     Result := T2;
 end;
 
+class function TSetup4DUtility.IsEmpty(const AValue: string): Boolean;
+begin
+  Result := RemoveSpaces(AValue).IsEmpty;
+end;
+
+class function TSetup4DUtility.IsValidJSONArray(
+  const AJSONString: string): Boolean;
+var
+  LJSON: TJSONArray;
+begin
+  try
+    LJSON := {$IFDEF FPC}TJSONArray(GetJSON{$Else}TJSONObject.ParseJSONValue{$ENDIF}(AJSONString){$IFDEF FPC}){$Else} as TJSONArray{$ENDIF};
+    try
+      Result := Assigned(LJSON) and (LJSON.Count > 0);
+
+      if Result then
+        Result := not (LJSON.{$IFDEF FPC}AsJSON = {$Else}ToJSON.Equals({$ENDIF}'[]'){$IFNDEF FPC}){$ENDIF};
+    finally
+      LJSON.Free;
+    end;
+  except
+    Result := False;
+  end;
+end;
+
+class function TSetup4DUtility.IsValidJSONObject(
+  const AJSONString: string): Boolean;
+var
+  LJSON: {$IFDEF FPC}TJSONData{$ELSE}TJSONObject{$ENDIF};
+begin
+  try
+    if AJSONString.Trim.IsEmpty then
+      raise Exception.Create(TSetup4DUtilityConstantes.REQUIRED_INFORMATION('AJSONString'));
+
+    LJSON := {$IFDEF FPC}GetJSON{$ELSE}TJSONObject.ParseJSONValue{$ENDIF}(AJSONString){$IFNDEF FPC} as TJSONObject{$ENDIF};
+    try
+      Result := Assigned(LJSON){$IFDEF FPC} AND (LJSON.JSONType = jtObject){$ENDIF};
+
+      if Result then
+        Result := NOT {$IFDEF FPC}(LJSON.AsJSON = '{}'){$ELSE}LJSON.ToJSON.Equals('{}'){$ENDIF};
+    finally
+      {$IFDEF FPC}FreeAndNil({$ENDIF}LJSON{$IFDEF FPC}){$ELSE}.Free{$ENDIF};
+    end;
+  except
+    Result := False;
+  end;
+end;
 
 class function TSetup4DUtility.OnlyAlpha(const AValue: String): String;
 Var
@@ -1210,20 +1327,27 @@ class function TSetup4DUtility.ProcessHorseExceptionMessage(
   AValue: Exception): string;
 begin
   Result := AValue.Message;
-
   if AValue.Message.Contains('max_user_connections') then
   begin
     Result := TSetup4DUtilityConstantes.MAX_USER_CONNECTIONS;
     Exit;
   end;
-
   if AValue.Message.Contains('a foreign key constraint fails') then
   begin
     Result := TSetup4DUtilityConstantes.FOREGIN_KEY_FAILS;
     Exit;
   end;
 
-  if AValue.Message.Equals(TSetup4DUtilityConstantes.NO_RECORDS_FOUND) then
+  if AValue.Message.ToLower.Contains('unexpected response status code: 404') then
+  begin
+    Result := TSetup4DUtilityConstantes.NO_RESOURCE_FOUND;
+    Exit;
+  end;
+
+  if AValue.Message.Equals(TSetup4DUtilityConstantes.MAX_USER_CONNECTIONS) or
+     AValue.Message.Equals(TSetup4DUtilityConstantes.FOREGIN_KEY_FAILS) or
+     AValue.Message.Equals(TSetup4DUtilityConstantes.NO_RECORDS_FOUND) or
+     AValue.Message.Equals(TSetup4DUtilityConstantes.NO_RESOURCE_FOUND) then
     Exit;
 
   Result := TSetup4DUtilityConstantes.MESSAGE_GENERIC(AValue.Message);
@@ -1244,6 +1368,11 @@ begin
     raise EHorseException.New
             .Error(ProcessHorseExceptionMessage(AValue))
             .Status(THTTPStatus.BadRequest);
+
+   if AValue.Message.ToLower.Contains('unexpected response status code: 404') then
+    raise EHorseException.New
+            .Error(ProcessHorseExceptionMessage(AValue))
+            .Status(THTTPStatus.NotFound);
 
   raise EHorseException.New
       .Error(ProcessHorseExceptionMessage(AValue))

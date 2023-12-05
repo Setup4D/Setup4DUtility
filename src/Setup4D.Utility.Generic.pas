@@ -1,7 +1,11 @@
 ﻿unit Setup4D.Utility.Generic;
 interface
 uses
+  {$IF DEFINED(FPC)}
+  Classes;
+  {$ELSE}
   System.Classes;
+  {$ENDIF}
 type
   {$IFDEF HAS_PORTUGUES}
   /// <summary>
